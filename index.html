@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#E75480">
+<title>Panduan Diet Sehat Ibu</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Nunito Sans',sans-serif;background:#FFF5F8;color:#2D1A20;min-height:100vh}
+button{font-family:'Nunito Sans',sans-serif;touch-action:manipulation;cursor:pointer}
+:root{--pink:#E75480;--green:#3DAA6E;--orange:#F5882A;--blue:#3498DB;--purple:#9B59B6;
+  --bg:#FFF5F8;--surface:#fff;--border:#F5DDE5;--text:#2D1A20;--muted:#9A7A82}
+
+#hdr{background:#fff;border-bottom:2px solid var(--border);padding:14px 16px 0;position:sticky;top:0;z-index:100;box-shadow:0 2px 16px rgba(0,0,0,.05)}
+.hrow{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-ic{width:38px;height:38px;background:linear-gradient(135deg,#E75480,#FF8FAB);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.logo-t h1{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;line-height:1.1}
+.logo-t p{font-size:11px;color:var(--muted);font-weight:600}
+.prog-info{text-align:right;font-size:11px;color:var(--muted);font-weight:600}
+.prog-wrap{background:var(--border);border-radius:99px;height:6px;width:100px;margin-top:4px}
+.prog-bar{background:linear-gradient(90deg,#E75480,#FF8FAB);border-radius:99px;height:6px;width:0%;transition:width .4s}
+.nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-btn{flex-shrink:0;padding:9px 12px;border:none;background:none;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:var(--muted);border-bottom:3px solid transparent;border-radius:8px 8px 0 0;white-space:nowrap}
+.nav-btn.active{color:var(--pink);border-bottom-color:var(--pink)}
+
+main{max-width:700px;margin:0 auto;padding:16px 14px 90px}
+.page{display:none}.page.active{display:block}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#E75480,#FF8FAB);border-radius:20px;padding:20px;color:#fff;margin-bottom:16px}
+.hero h2{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;margin-bottom:4px}
+.hero p{font-size:13px;opacity:.9;line-height:1.5}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px}
+.hstat{background:rgba(255,255,255,.2);border-radius:12px;padding:10px;text-align:center}
+.hstat-num{font-family:'Nunito',sans-serif;font-weight:800;font-size:17px}
+.hstat-lbl{font-size:10px;opacity:.85;margin-top:2px}
+
+/* DAY SELECTOR */
+.day-selector{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:16px;padding-bottom:4px}
+.day-selector::-webkit-scrollbar{display:none}
+.day-btn{flex-shrink:0;padding:8px 14px;border-radius:99px;border:1.5px solid var(--border);background:#fff;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:var(--muted)}
+.day-btn.active{background:var(--pink);border-color:var(--pink);color:#fff}
+.day-btn.today-mark{border-color:var(--pink);color:var(--pink)}
+
+/* MEAL SECTION */
+.meal-sec{margin-bottom:18px}
+.meal-hdr{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border:1.5px solid var(--border);border-radius:12px;margin-bottom:10px}
+.meal-em{font-size:20px}
+.meal-lbl{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px}
+.meal-time{margin-left:auto;font-size:11px;color:var(--muted);background:var(--bg);padding:3px 10px;border-radius:99px;border:1px solid var(--border)}
+
+/* MENU CARD */
+.menu-card{background:#fff;border:1.5px solid var(--border);border-radius:16px;margin-bottom:10px;overflow:hidden}
+.menu-hdr{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;min-height:54px}
+.menu-ic{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.menu-tw{flex:1;min-width:0}
+.menu-title{font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;line-height:1.3}
+.menu-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.menu-cal{font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px;flex-shrink:0;white-space:nowrap}
+.chk-m{width:30px;height:30px;border-radius:50%;border:2px solid var(--border);background:var(--bg);color:#ccc;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.chk-m.done{background:#3DAA6E;border-color:#3DAA6E;color:#fff}
+.chev{width:18px;height:18px;color:var(--muted);transition:transform .25s;flex-shrink:0}
+.menu-hdr.open .chev{transform:rotate(180deg)}
+.menu-body{display:none;padding:0 14px 14px;border-top:1.5px solid var(--border)}
+.menu-body.show{display:block}
+
+/* FOOD ITEMS */
+.fi{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px}
+.fi:last-of-type{border-bottom:none}
+.fi-em{font-size:16px;flex-shrink:0;width:24px;text-align:center}
+.fi-info{flex:1}
+.fi-name{font-weight:600;font-size:13px}
+.fi-por{font-size:11px;color:var(--muted)}
+.fi-cal{font-size:11px;font-weight:700;color:var(--pink);flex-shrink:0}
+.note-box{background:var(--bg);border-radius:10px;padding:10px 12px;margin-top:10px;font-size:12px;line-height:1.7;color:var(--text);border-left:3px solid var(--pink)}
+.note-box strong{color:var(--pink);display:block;margin-bottom:2px;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+
+/* LABEL BADGES */
+.badge-id{background:#FFF8EB;color:#F5882A}
+.badge-west{background:#EBF6FB;color:#3498DB}
+.badge-low{background:#EDF8F1;color:#3DAA6E}
+
+/* ROTASI MINGGUAN */
+.week-grid{display:flex;flex-direction:column;gap:10px}
+.week-row{background:#fff;border:1.5px solid var(--border);border-radius:14px;overflow:hidden}
+.week-row-hdr{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer}
+.week-day{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;width:70px;flex-shrink:0}
+.week-theme{flex:1;font-size:12px;color:var(--muted)}
+.week-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px;flex-shrink:0}
+.week-body{display:none;padding:0 14px 12px;border-top:1.5px solid var(--border)}
+.week-body.show{display:block}
+.week-meal{padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
+.week-meal:last-child{border-bottom:none}
+.week-meal-time{font-family:'Nunito',sans-serif;font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+.week-meal-name{font-weight:600;color:var(--text)}
+.week-meal-cal{font-size:11px;color:var(--pink);font-weight:700;margin-top:1px}
+
+/* TIPS PAGE */
+.tip-card{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
+.tip-em{font-size:24px;flex-shrink:0}
+.tip-h{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;margin-bottom:4px}
+.tip-p{font-size:13px;line-height:1.6}
+.do-dont{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.do-box{background:#EDF8F2;border:1.5px solid #B8E6CC;border-radius:12px;padding:12px}
+.dont-box{background:#FEF0F0;border:1.5px solid #F5C6C6;border-radius:12px;padding:12px}
+.do-box strong{color:#3DAA6E;display:block;font-family:'Nunito',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.dont-box strong{color:#E74C3C;display:block;font-family:'Nunito',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.ddi{display:flex;gap:6px;padding:5px 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:12px;align-items:flex-start;line-height:1.5}
+.ddi:last-child{border-bottom:none}
+.sec-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;margin:16px 0 10px}
+.info-card{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:14px;margin-bottom:12px;font-size:13px;line-height:1.7}
+.info-card h3{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;margin-bottom:8px}
+
+/* BERAT */
+.progress-target{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:16px;margin-bottom:16px}
+.progress-target h3{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;margin-bottom:12px}
+.target-bar-wrap{background:var(--border);border-radius:99px;height:12px;margin:8px 0}
+.target-bar{background:linear-gradient(90deg,#E75480,#3DAA6E);border-radius:99px;height:12px;transition:width .5s}
+.target-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-weight:600}
+.weight-form{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:16px;margin-bottom:16px}
+.weight-form h3{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;margin-bottom:12px}
+.w-input-row{display:flex;gap:8px}
+.w-input{flex:1;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:16px;background:var(--bg);color:var(--text)}
+.w-input:focus{outline:none;border-color:var(--pink)}
+.btn-save-w{background:var(--pink);color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:700;font-size:13px}
+.weight-entry{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
+.weight-entry:last-child{border-bottom:none}
+.w-date{color:var(--muted);font-size:11px;margin-top:2px}
+.w-val{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;color:var(--pink)}
+.w-diff{font-size:11px;font-weight:700;padding:2px 6px;border-radius:99px}
+.w-down{background:#EDF8F2;color:#3DAA6E}
+.w-up{background:#FEF0F0;color:#E74C3C}
+.w-same{background:#F5F5F5;color:#888}
+
+/* RIWAYAT */
+.rw-banner{background:linear-gradient(135deg,#E75480,#FF8FAB);border-radius:14px;padding:16px;color:#fff;margin-bottom:16px}
+.rw-banner h3{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;margin-bottom:4px}
+.rw-banner p{font-size:12px;opacity:.9}
+.streak-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px}
+.streak-card{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:12px;text-align:center}
+.streak-num{font-family:'Nunito',sans-serif;font-weight:800;font-size:22px;color:var(--pink);line-height:1}
+.streak-lbl{font-size:11px;color:var(--muted);font-weight:600;margin-top:4px}
+.rw-hdr2{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.rw-hdr2 h2{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800}
+.btn-clear{border:1.5px solid #F5C6C6;background:#FEF0F0;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;color:#E74C3C}
+.date-card{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px}
+.date-hdr{display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+.date-lbl{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px}
+.date-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.date-badge2{background:linear-gradient(135deg,#E75480,#FF8FAB);color:#fff;font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;padding:3px 10px;border-radius:99px}
+.rw-item{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px}
+.rw-item:last-child{border-bottom:none}
+.rw-dot{width:8px;height:8px;border-radius:50%;background:var(--pink);flex-shrink:0}
+.empty-state{text-align:center;padding:40px 20px;color:var(--muted)}
+.empty-state .es-icon{font-size:40px;margin-bottom:12px}
+.empty-state p{font-size:14px;line-height:1.8}
+
+#statbar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid var(--border);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;z-index:100;box-shadow:0 -2px 12px rgba(0,0,0,.05)}
+.stat-item{text-align:center}
+.stat-num{font-family:'Nunito',sans-serif;font-weight:800;font-size:18px;line-height:1;color:var(--pink)}
+.stat-lbl{font-size:10px;color:var(--muted);font-weight:600}
+.btn-reset{border:1.5px solid var(--border);background:var(--bg);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;color:var(--muted)}
+
+.hidden{display:none!important}
+@media(max-width:500px){.do-dont{grid-template-columns:1fr}}
+@supports(padding:env(safe-area-inset-bottom)){
+  #statbar{padding-bottom:calc(10px + env(safe-area-inset-bottom))}
+  main{padding-bottom:calc(90px + env(safe-area-inset-bottom))}
+}
+</style>
+</head>
+<body>
+<div id="hdr">
+  <div class="hrow">
+    <div class="logo">
+      <div class="logo-ic">&#127800;</div>
+      <div class="logo-t"><h1>Panduan Diet Sehat</h1><p>71kg menuju 60kg &middot; Target 3-4 bulan</p></div>
+    </div>
+    <div class="prog-info">
+      <div id="prog-txt">0 selesai hari ini</div>
+      <div class="prog-wrap"><div class="prog-bar" id="prog-bar"></div></div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="nav-btn active" data-page="pg-menu">&#127828; Menu</button>
+    <button class="nav-btn" data-page="pg-rotasi">&#128197; Rotasi</button>
+    <button class="nav-btn" data-page="pg-tips">&#128161; Tips</button>
+    <button class="nav-btn" data-page="pg-berat">&#9878; Berat</button>
+    <button class="nav-btn" data-page="pg-riwayat">&#128203; Riwayat</button>
+  </div>
+</div>
+
+<main>
+<!-- ======== PAGE MENU ======== -->
+<div id="pg-menu" class="page active">
+  <div class="hero">
+    <h2>&#127800; Menu Harian Lengkap</h2>
+    <p>Variasi Indonesia &amp; Western &middot; Target 1.400 kkal/hari &middot; Pilih menu sesuai selera hari ini</p>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-num">1.400</div><div class="hstat-lbl">Kkal/hari</div></div>
+      <div class="hstat"><div class="hstat-num">3-4x</div><div class="hstat-lbl">Makan/hari</div></div>
+      <div class="hstat"><div class="hstat-num">0,5kg</div><div class="hstat-lbl">Turun/minggu</div></div>
+    </div>
+  </div>
+
+  <!-- SARAPAN -->
+  <div class="meal-sec">
+    <div class="meal-hdr"><span class="meal-em">&#127749;</span><span class="meal-lbl">Sarapan</span><span class="meal-time">06:30-08:00</span></div>
+
+    <div class="menu-card" data-mid="s1">
+      <div class="menu-hdr">
+        <div class="menu-ic" style="background:#FFF8EB">&#127859;</div>
+        <div class="menu-tw"><div class="menu-title">Nasi Uduk Sehat + Telur Balado</div><div class="menu-sub"><span class="menu-cal badge-id">Indonesia</span></div></div>
+        <span class="menu-cal" style="background:#FFF8EB;color:#F5882A">340 kkal</span>
+        <button class="chk-m">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="menu-body">
+        <div class="fi"><span class="fi-em">&#127859;</span><div class="fi-info"><div class="fi-name">Nasi merah kukus santan encer</div><div class="fi-por">3/4 centong (80g matang)</div></div><span class="fi-cal">120 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129428;</span><div class="fi-info"><div class="fi-name">Telur balado (1 butir, cabai sedikit)</div><div class="fi-por">1 butir ukuran sedang</div></div><span class="fi-cal">90 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129388;</span><div class="fi-info"><div class="fi-name">Tempe goreng tipis</div><div class="fi-por">2 potong kecil</div></div><span class="fi-cal">80 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129367;</span><div class="fi-info"><div class="fi-name">Mentimun + kemangi segar</div><div class="fi-por">secukupnya</div></div><span class="fi-cal">15 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#9749;</span><div class="fi-info"><div class="fi-name">Teh tawar / teh hijau</div><div class="fi-por">1 gelas besar</div></div><span class="fi-cal">0 kkal</span></div>
+        <div class="note-box"><strong>Tips memasak</strong>Santan diganti santan encer (1 sdm santan + air). Goreng tempe dengan sedikit minyak atau oven. Tetap nikmat tanpa kalori berlebih.</div>
+      </div>
+    </div>
+
+    <div class="menu-card" data-mid="s2">
+      <div class="menu-hdr">
+        <div class="menu-ic" style="background:#EDF8F1">&#129379;</div>
+        <div class="menu-tw"><div class="menu-title">Oatmeal Pisang Madu + Susu</div><div class="menu-sub"><span class="menu-cal badge-west">Western</span></div></div>
+        <span class="menu-cal" style="background:#EDF8F1;color:#3DAA6E">310 kkal</span>
+        <button class="chk-m">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="menu-body">
+        <div class="fi"><span class="fi-em">&#129379;</span><div class="fi-info"><div class="fi-name">Oatmeal rolled / instan</div><div class="fi-por">50g (5 sdm)</div></div><span class="fi-cal">190 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127820;</span><div class="fi-info"><div class="fi-name">Pisang ambon / cavendish</div><div class="fi-por">1 buah sedang, iris</div></div><span class="fi-cal">80 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127855;</span><div class="fi-info"><div class="fi-name">Madu asli</div><div class="fi-por">1 sdt</div></div><span class="fi-cal">20 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127803;</span><div class="fi-info"><div class="fi-name">Kayu manis bubuk</div><div class="fi-por">sejumput (bantu stabilkan gula darah)</div></div><span class="fi-cal">0 kkal</span></div>
+        <div class="note-box"><strong>Cara membuat</strong>Didihkan 300ml air, masukkan oat, aduk 3 menit. Sajikan dengan irisan pisang dan madu. Tambah biji chia 1 sdt untuk lebih mengenyangkan.</div>
+      </div>
+    </div>
+
+    <div class="menu-card" data-mid="s3">
+      <div class="menu-hdr">
+        <div class="menu-ic" style="background:#FFF0EB">&#129425;</div>
+        <div class="menu-tw"><div class="menu-title">Bubur Ayam Sehat Homemade</div><div class="menu-sub"><span class="menu-cal badge-id">Indonesia</span></div></div>
+        <span class="menu-cal" style="background:#FFF0EB;color:#E75480">330 kkal</span>
+        <button class="chk-m">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="menu-body">
+        <div class="fi"><span class="fi-em">&#127859;</span><div class="fi-info"><div class="fi-name">Nasi putih (untuk bubur)</div><div class="fi-por">50g mentah, masak jadi bubur</div></div><span class="fi-cal">180 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127831;</span><div class="fi-info"><div class="fi-name">Ayam suwir rebus (tanpa kulit)</div><div class="fi-por">50g</div></div><span class="fi-cal">80 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129361;</span><div class="fi-info"><div class="fi-name">Seledri + daun bawang + jahe</div><div class="fi-por">secukupnya</div></div><span class="fi-cal">10 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129428;</span><div class="fi-info"><div class="fi-name">Telur puyuh rebus</div><div class="fi-por">3 butir</div></div><span class="fi-cal">40 kkal</span></div>
+        <div class="note-box"><strong>Tips diet</strong>Hindari krupuk dan tambahan minyak. Bubur tinggi air membuat kenyang lebih lama dengan kalori rendah. Cocok untuk sarapan musim hujan.</div>
+      </div>
+    </div>
+
+    <div class="menu-card" data-mid="s4">
+      <div class="menu-hdr">
+        <div class="menu-ic" style="background:#EBF6FB">&#129371;</div>
+        <div class="menu-tw"><div class="menu-title">Smoothie Bowl Tropis</div><div class="menu-sub"><span class="menu-cal badge-west">Western</span></div></div>
+        <span class="menu-cal" style="background:#EBF6FB;color:#3498DB">290 kkal</span>
+        <button class="chk-m">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="menu-body">
+        <div class="fi"><span class="fi-em">&#127820;</span><div class="fi-info"><div class="fi-name">Pisang beku (blender)</div><div class="fi-por">1 buah besar</div></div><span class="fi-cal">100 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127815;</span><div class="fi-info"><div class="fi-name">Mangga / pepaya segar</div><div class="fi-por">100g</div></div><span class="fi-cal">60 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129380;</span><div class="fi-info"><div class="fi-name">Greek yogurt plain</div><div class="fi-por">100g</div></div><span class="fi-cal">90 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127823;</span><div class="fi-info"><div class="fi-name">Topping: stroberi + granola sedikit</div><div class="fi-por">30g granola</div></div><span class="fi-cal">120 kkal</span></div>
+        <div class="note-box"><strong>Cara membuat</strong>Blender pisang beku + yogurt hingga kental. Tuang ke mangkok. Tata topping di atasnya. Kunci: pisang harus dibekukan dulu agar tekstur creamy.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SNACK PAGI -->
+  <div class="meal-sec">
+    <div class="meal-hdr"><span class="meal-em">&#9728;</span><span class="meal-lbl">Snack Pagi</span><span class="meal-time">10:00</span></div>
+
+    <div class="menu-card" data-mid="sp1">
+      <div class="menu-hdr">
+        <div class="menu-ic" style="background:#FFF8EB">&#127822;</div>
+        <div class="menu-tw"><div class="menu-title">Buah Potong + Almond / Kacang</div><div class="menu-sub"><span class="menu-cal badge-low">Rendah Kalori</span></div></div>
+        <span class="menu-cal" style="background:#FFF8EB;color:#F5882A">150 kkal</span>
+        <button class="chk-m">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="menu-body">
+        <div class="fi"><span class="fi-em">&#127822;</span><div class="fi-info"><div class="fi-name">Apel / pir / jeruk / guava</div><div class="fi-por">1 buah sedang (pilih salah satu)</div></div><span class="fi-cal">70 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127807;</span><div class="fi-info"><div class="fi-name">Kacang almond / mete / kenari</div><div class="fi-por">10-12 butir</div></div><span class="fi-cal">80 kkal</span></div>
+        <div class="note-box"><strong>Kenapa wajib snack?</strong>Melewatkan snack pagi memicu lapar berlebih saat makan siang. Kombinasi buah + protein nabati menjaga energi stabil sampai jam 12.</div>
+      </div>
+    </div>
+
+    <div class="menu-card" data-mid="sp2">
+      <div class="menu-hdr">
+        <div class="menu-ic" style="background:#EDF8F1">&#129388;</div>
+        <div class="menu-tw"><div class="menu-title">Tahu / Tempe Kukus + Sambal Kecap</div><div class="menu-sub"><span class="menu-cal badge-id">Indonesia</span></div></div>
+        <span class="menu-cal" style="background:#EDF8F1;color:#3DAA6E">140 kkal</span>
+        <button class="chk-m">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="menu-body">
+        <div class="fi"><span class="fi-em">&#129388;</span><div class="fi-info"><div class="fi-name">Tahu putih kukus / goreng tipis</div><div class="fi-por">2 potong sedang</div></div><span class="fi-cal">80 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127798;</span><div class="fi-info"><div class="fi-name">Kecap manis (sedikit) + cabai rawit</div><div class="fi-por">1 sdt kecap</div></div><span class="fi-cal">20 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129367;</span><div class="fi-info"><div class="fi-name">Timun segar</div><div class="fi-por">5-6 iris</div></div><span class="fi-cal">10 kkal</span></div>
+        <div class="note-box"><strong>Tips</strong>Snack ala Indonesia yang mengenyangkan. Tahu tinggi protein nabati, baik untuk ibu yang tidak terlalu suka camilan manis.</div>
+      </div>
+    </div>
+
+    <div class="menu-card" data-mid="sp3">
+      <div class="menu-hdr">
+        <div class="menu-ic" style="background:#F7EDFB">&#127968;</div>
+        <div class="menu-tw"><div class="menu-title">Roti Gandum + Selai Kacang</div><div class="menu-sub"><span class="menu-cal badge-west">Western</span></div></div>
+        <span class="menu-cal" style="background:#F7EDFB;color:#9B59B6">170 kkal</span>
+        <button class="chk-m">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="menu-body">
+        <div class="fi"><span class="fi-em">&#127838;</span><div class="fi-info"><div class="fi-name">Roti gandum whole wheat</div><div class="fi-por">1 lembar</div></div><span class="fi-cal">80 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129372;</span><div class="fi-info"><div class="fi-name">Selai kacang alami (peanut butter)</div><div class="fi-por">1 sdt (tanpa gula tambahan)</div></div><span class="fi-cal">90 kkal</span></div>
+        <div class="note-box"><strong>Tips beli</strong>Pilih peanut butter dengan bahan hanya kacang tanah. Hindari yang ada tambahan gula/minyak sawit. Biasanya ada di supermarket / toko organik.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAKAN SIANG -->
+  <div class="meal-sec">
+    <div class="meal-hdr"><span class="meal-em">&#9925;</span><span class="meal-lbl">Makan Siang</span><span class="meal-time">12:00-13:00</span></div>
+
+    <div class="menu-card" data-mid="l1">
+      <div class="menu-hdr">
+        <div class="menu-ic" style="background:#EBF6FB">&#127831;</div>
+        <div class="menu-tw"><div class="menu-title">Ayam Bakar + Nasi Merah + Lalapan</div><div class="menu-sub"><span class="menu-cal badge-id">Indonesia</span></div></div>
+        <span class="menu-cal" style="background:#EBF6FB;color:#3498DB">420 kkal</span>
+        <button class="chk-m">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="menu-body">
+        <div class="fi"><span class="fi-em">&#127859;</span><div class="fi-info"><div class="fi-name">Nasi merah pulen</div><div class="fi-por">3/4 centong (100g matang)</div></div><span class="fi-cal">130 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127831;</span><div class="fi-info"><div class="fi-name">Dada ayam bakar (bumbu rempah)</div><div class="fi-por">100g tanpa kulit</div></div><span class="fi-cal">160 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129367;</span><div class="fi-info"><div class="fi-name">Lalapan: kol, kemangi, timun, tomat</div><div class="fi-por">bebas / banyak</div></div><span class="fi-cal">30 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127798;</span><div class="fi-info"><div class="fi-name">Sambal tomat segar (tanpa terasi banyak)</div><div class="fi-por">2-3 sdt</div></div><span class="fi-cal">20 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129388;</span><div class="fi-info"><div class="fi-name">Tempe bacem / tahu goreng tipis</div><div class="fi-por">1 potong</div></div><span class="fi-cal">60 kkal</span></div>
+        <div class="note-box"><strong>Kiat warung</strong>Jika beli di warteg / warung, pilih ayam/ikan + 2-3 macam sayuran. Hindari nasi putih berlebih dan gorengan. Minta nasinya setengah porsi.</div>
+      </div>
+    </div>
+
+    <div class="menu-card" data-mid="l2">
+      <div class="menu-hdr">
+        <div class="menu-ic" style="background:#EDF8F1">&#127981;</div>
+        <div class="menu-tw"><div class="menu-title">Gado-Gado Sehat</div><div class="menu-sub"><span class="menu-cal badge-id">Indonesia</span></div></div>
+        <span class="menu-cal" style="background:#EDF8F1;color:#3DAA6E">390 kkal</span>
+        <button class="chk-m">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="menu-body">
+        <div class="fi"><span class="fi-em">&#129361;</span><div class="fi-info"><div class="fi-name">Sayuran rebus: bayam, tauge, kangkung, wortel</div><div class="fi-por">1 piring penuh</div></div><span class="fi-cal">60 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129428;</span><div class="fi-info"><div class="fi-name">Telur rebus</div><div class="fi-por">1 butir</div></div><span class="fi-cal">70 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129388;</span><div class="fi-info"><div class="fi-name">Tahu + tempe rebus</div><div class="fi-por">masing-masing 1 potong</div></div><span class="fi-cal">120 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127859;</span><div class="fi-info"><div class="fi-name">Lontong / nasi (opsional, sedikit)</div><div class="fi-por">1/2 lontong kecil</div></div><span class="fi-cal">70 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129372;</span><div class="fi-info"><div class="fi-name">Saus kacang (dibuat tipis)</div><div class="fi-por">3 sdm</div></div><span class="fi-cal">120 kkal</span></div>
+        <div class="note-box"><strong>Modifikasi diet</strong>Kurangi saus kacang (bagian paling tinggi kalori). Perbanyak sayuran. Gado-gado adalah menu diet terbaik Indonesia karena tinggi serat dan protein nabati.</div>
+      </div>
+    </div>
+
+    <div class="menu-card" data-mid="l3">
+      <div class="menu-hdr">
+        <div class="menu-ic" style="background:#FFF0EB">&#127813;</div>
+        <div class="menu-tw"><div class="menu-title">Soto Ayam Bening + Nasi Merah</div><div class="menu-sub"><span class="menu-cal badge-id">Indonesia</span></div></div>
+        <span class="menu-cal" style="background:#FFF0EB;color:#E75480">380 kkal</span>
+        <button class="chk-m">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="menu-body">
+        <div class="fi"><span class="fi-em">&#127859;</span><div class="fi-info"><div class="fi-name">Nasi merah</div><div class="fi-por">1/2 centong (70g matang)</div></div><span class="fi-cal">90 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127831;</span><div class="fi-info"><div class="fi-name">Suwiran dada ayam</div><div class="fi-por">80g</div></div><span class="fi-cal">130 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127811;</span><div class="fi-info"><div class="fi-name">Tauge, kol, seledri, tomat</div><div class="fi-por">bebas</div></div><span class="fi-cal">30 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129428;</span><div class="fi-info"><div class="fi-name">Telur rebus belah 2</div><div class="fi-por">1 butir</div></div><span class="fi-cal">70 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129377;</span><div class="fi-info"><div class="fi-name">Kaldu soto bening (kunyit, jahe, rempah)</div><div class="fi-por">1 mangkok</div></div><span class="fi-cal">30 kkal</span></div>
+        <div class="note-box"><strong>Tips</strong>Pilih soto bening, bukan soto santan. Hindari jeroan dan emping/kerupuk. Kuah kaldu bening justru membantu pencernaan dan metabolisme.</div>
+      </div>
+    </div>
+
+    <div class="menu-card" data-mid="l4">
+      <div class="menu-hdr">
+        <div class="menu-ic" style="background:#F7EDFB">&#129385;</div>
+        <div class="menu-tw"><div class="menu-title">Salmon / Tuna Bowl Ala Korea</div><div class="menu-sub"><span class="menu-cal badge-west">Western/Fusion</span></div></div>
+        <span class="menu-cal" style="background:#F7EDFB;color:#9B59B6">430 kkal</span>
+        <button class="chk-m">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="menu-body">
+        <div class="fi"><span class="fi-em">&#127859;</span><div class="fi-info"><div class="fi-name">Nasi merah</div><div class="fi-por">3/4 centong</div></div><span class="fi-cal">130 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129385;</span><div class="fi-info"><div class="fi-name">Tuna kaleng / salmon panggang</div><div class="fi-por">100g</div></div><span class="fi-cal">130 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129361;</span><div class="fi-info"><div class="fi-name">Edamame / kacang polong</div><div class="fi-por">50g</div></div><span class="fi-cal">60 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129393;</span><div class="fi-info"><div class="fi-name">Wortel parut + timun iris + selada</div><div class="fi-por">bebas</div></div><span class="fi-cal">30 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127798;</span><div class="fi-info"><div class="fi-name">Saus: kecap asin + wijen + lemon</div><div class="fi-por">1 sdm</div></div><span class="fi-cal">20 kkal</span></div>
+        <div class="note-box"><strong>Versi simpel</strong>Bisa pakai tuna kaleng (yang di air, bukan minyak). Saus bisa diganti kecap manis sedikit + jeruk nipis. Omega-3 dari ikan sangat baik untuk metabolisme lemak.</div>
+      </div>
+    </div>
+
+    <div class="menu-card" data-mid="l5">
+      <div class="menu-hdr">
+        <div class="menu-ic" style="background:#EBF6FB">&#127820;</div>
+        <div class="menu-tw"><div class="menu-title">Pecel Sayur + Nasi Merah</div><div class="menu-sub"><span class="menu-cal badge-id">Indonesia</span></div></div>
+        <span class="menu-cal" style="background:#EBF6FB;color:#3498DB">370 kkal</span>
+        <button class="chk-m">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="menu-body">
+        <div class="fi"><span class="fi-em">&#127859;</span><div class="fi-info"><div class="fi-name">Nasi merah</div><div class="fi-por">1/2 centong</div></div><span class="fi-cal">90 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129361;</span><div class="fi-info"><div class="fi-name">Sayuran pecel: bayam, tauge, kacang panjang, kenikir rebus</div><div class="fi-por">1 piring besar</div></div><span class="fi-cal">50 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129372;</span><div class="fi-info"><div class="fi-name">Bumbu kacang pecel (dibuat encer)</div><div class="fi-por">2 sdm</div></div><span class="fi-cal">120 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129428;</span><div class="fi-info"><div class="fi-name">Telur rebus / tempe goreng tipis</div><div class="fi-por">1 butir / 1 potong</div></div><span class="fi-cal">80 kkal</span></div>
+        <div class="note-box"><strong>Tips</strong>Pecel adalah salad Indonesia! Sangat kaya serat dan vitamin. Kunci: buat bumbu kacang lebih encer agar kalorinya lebih rendah.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SNACK SORE -->
+  <div class="meal-sec">
+    <div class="meal-hdr"><span class="meal-em">&#127748;</span><span class="meal-lbl">Snack Sore</span><span class="meal-time">15:00-16:00</span></div>
+
+    <div class="menu-card" data-mid="ss1">
+      <div class="menu-hdr">
+        <div class="menu-ic" style="background:#EDF8F1">&#129380;</div>
+        <div class="menu-tw"><div class="menu-title">Greek Yogurt + Buah + Granola</div><div class="menu-sub"><span class="menu-cal badge-west">Western</span></div></div>
+        <span class="menu-cal" style="background:#EDF8F1;color:#3DAA6E">160 kkal</span>
+        <button class="chk-m">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="menu-body">
+        <div class="fi"><span class="fi-em">&#129380;</span><div class="fi-info"><div class="fi-name">Greek yogurt / yogurt plain</div><div class="fi-por">150g</div></div><span class="fi-cal">90 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127827;</span><div class="fi-info"><div class="fi-name">Stroberi / bluberi / anggur</div><div class="fi-por">segenggam</div></div><span class="fi-cal">40 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129379;</span><div class="fi-info"><div class="fi-name">Granola rendah gula</div><div class="fi-por">1 sdm saja</div></div><span class="fi-cal">30 kkal</span></div>
+      </div>
+    </div>
+
+    <div class="menu-card" data-mid="ss2">
+      <div class="menu-hdr">
+        <div class="menu-ic" style="background:#FFF8EB">&#127815;</div>
+        <div class="menu-tw"><div class="menu-title">Rujak Buah Segar (Tanpa Gula Berlebih)</div><div class="menu-sub"><span class="menu-cal badge-id">Indonesia</span></div></div>
+        <span class="menu-cal" style="background:#FFF8EB;color:#F5882A">130 kkal</span>
+        <button class="chk-m">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="menu-body">
+        <div class="fi"><span class="fi-em">&#127815;</span><div class="fi-info"><div class="fi-name">Mangga muda / bengkoang / jambu / nanas</div><div class="fi-por">150g campuran</div></div><span class="fi-cal">80 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127798;</span><div class="fi-info"><div class="fi-name">Bumbu rujak: gula merah sedikit + asam + cabai</div><div class="fi-por">1 sdt gula merah saja</div></div><span class="fi-cal">20 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127819;</span><div class="fi-info"><div class="fi-name">Kacang tanah sangrai (bukan goreng)</div><div class="fi-por">1 sdt</div></div><span class="fi-cal">30 kkal</span></div>
+        <div class="note-box"><strong>Tips</strong>Kurangi gula merah hingga separuh dari biasanya. Tambahkan lebih banyak jeruk nipis dan cabai untuk rasa. Rujak adalah snack Indonesia yang sangat sehat!</div>
+      </div>
+    </div>
+
+    <div class="menu-card" data-mid="ss3">
+      <div class="menu-hdr">
+        <div class="menu-ic" style="background:#FFF0EB">&#9749;</div>
+        <div class="menu-tw"><div class="menu-title">Teh Herbal + Pisang Rebus</div><div class="menu-sub"><span class="menu-cal badge-low">Rendah Kalori</span></div></div>
+        <span class="menu-cal" style="background:#FFF0EB;color:#E75480">110 kkal</span>
+        <button class="chk-m">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="menu-body">
+        <div class="fi"><span class="fi-em">&#9749;</span><div class="fi-info"><div class="fi-name">Teh jahe / teh kayu manis / teh hijau</div><div class="fi-por">1 gelas, tanpa gula</div></div><span class="fi-cal">5 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127820;</span><div class="fi-info"><div class="fi-name">Pisang raja / pisang kepok rebus</div><div class="fi-por">1 buah sedang</div></div><span class="fi-cal">90 kkal</span></div>
+        <div class="note-box"><strong>Manfaat</strong>Teh jahe meningkatkan metabolisme 5-10%. Pisang rebus lebih rendah indeks glikemiknya dibanding pisang goreng. Snack paling simpel dan hemat.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAKAN MALAM -->
+  <div class="meal-sec">
+    <div class="meal-hdr"><span class="meal-em">&#127769;</span><span class="meal-lbl">Makan Malam</span><span class="meal-time">18:00-19:00 (Max!)</span></div>
+
+    <div class="menu-card" data-mid="m1">
+      <div class="menu-hdr">
+        <div class="menu-ic" style="background:#FFF0EB">&#127836;</div>
+        <div class="menu-tw"><div class="menu-title">Ikan Bakar Bumbu Kuning + Sup Sayur</div><div class="menu-sub"><span class="menu-cal badge-id">Indonesia</span></div></div>
+        <span class="menu-cal" style="background:#FFF0EB;color:#E75480">280 kkal</span>
+        <button class="chk-m">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="menu-body">
+        <div class="fi"><span class="fi-em">&#127836;</span><div class="fi-info"><div class="fi-name">Ikan nila / kembung / lele bakar bumbu</div><div class="fi-por">1 ekor sedang (150g)</div></div><span class="fi-cal">150 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129361;</span><div class="fi-info"><div class="fi-name">Sup bening: wortel, buncis, labu, jagung</div><div class="fi-por">1 mangkok besar</div></div><span class="fi-cal">80 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127798;</span><div class="fi-info"><div class="fi-name">Sambal terasi / kecap</div><div class="fi-por">sedikit</div></div><span class="fi-cal">15 kkal</span></div>
+        <div class="note-box"><strong>Aturan makan malam</strong>Tanpa nasi atau max 1/4 centong. Makan malam ringan = tubuh membakar lemak lebih banyak saat tidur. Ini kunci utama penurunan berat badan yang cepat!</div>
+      </div>
+    </div>
+
+    <div class="menu-card" data-mid="m2">
+      <div class="menu-hdr">
+        <div class="menu-ic" style="background:#EDF8F1">&#127859;</div>
+        <div class="menu-tw"><div class="menu-title">Tumis Ayam Sayuran (Capcay Sehat)</div><div class="menu-sub"><span class="menu-cal badge-id">Indonesia</span></div></div>
+        <span class="menu-cal" style="background:#EDF8F1;color:#3DAA6E">260 kkal</span>
+        <button class="chk-m">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="menu-body">
+        <div class="fi"><span class="fi-em">&#127831;</span><div class="fi-info"><div class="fi-name">Dada ayam iris tipis</div><div class="fi-por">80g</div></div><span class="fi-cal">130 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129361;</span><div class="fi-info"><div class="fi-name">Brokoli, wortel, sawi, kembang kol, jagung muda</div><div class="fi-por">2 mangkok (banyak)</div></div><span class="fi-cal">70 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129361;</span><div class="fi-info"><div class="fi-name">Bawang putih, jahe, minyak wijen</div><div class="fi-por">bumbu secukupnya, 1 sdt minyak</div></div><span class="fi-cal">40 kkal</span></div>
+        <div class="note-box"><strong>Cara memasak</strong>Tumis dengan 1 sdt minyak zaitun / minyak kelapa saja. Masak sayuran tidak terlalu lama agar nutrisi tetap terjaga. Jika ingin ada nasi, max 1/4 centong.</div>
+      </div>
+    </div>
+
+    <div class="menu-card" data-mid="m3">
+      <div class="menu-hdr">
+        <div class="menu-ic" style="background:#EBF6FB">&#129385;</div>
+        <div class="menu-tw"><div class="menu-title">Sup Salmon Tofu (Japanese Style)</div><div class="menu-sub"><span class="menu-cal badge-west">Western/Jepang</span></div></div>
+        <span class="menu-cal" style="background:#EBF6FB;color:#3498DB">270 kkal</span>
+        <button class="chk-m">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="menu-body">
+        <div class="fi"><span class="fi-em">&#129385;</span><div class="fi-info"><div class="fi-name">Salmon fillet / ikan kakap</div><div class="fi-por">80g</div></div><span class="fi-cal">130 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129388;</span><div class="fi-info"><div class="fi-name">Tahu sutra / tahu putih</div><div class="fi-por">100g</div></div><span class="fi-cal">60 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129361;</span><div class="fi-info"><div class="fi-name">Bayam / bok choy / jamur</div><div class="fi-por">bebas</div></div><span class="fi-cal">30 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127798;</span><div class="fi-info"><div class="fi-name">Kaldu + kecap asin + jahe + bawang</div><div class="fi-por">secukupnya</div></div><span class="fi-cal">20 kkal</span></div>
+        <div class="note-box"><strong>Tips</strong>Bisa pakai ikan murah pengganti salmon: kakap, kerapu, atau tenggiri. Sup hangat malam hari sangat baik untuk pencernaan dan membantu tidur lebih nyenyak.</div>
+      </div>
+    </div>
+
+    <div class="menu-card" data-mid="m4">
+      <div class="menu-hdr">
+        <div class="menu-ic" style="background:#F7EDFB">&#129388;</div>
+        <div class="menu-tw"><div class="menu-title">Tempe Tahu Bacem + Sayur Bening Bayam</div><div class="menu-sub"><span class="menu-cal badge-id">Indonesia</span></div></div>
+        <span class="menu-cal" style="background:#F7EDFB;color:#9B59B6">250 kkal</span>
+        <button class="chk-m">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="menu-body">
+        <div class="fi"><span class="fi-em">&#129388;</span><div class="fi-info"><div class="fi-name">Tempe bacem (kukus/oven, bukan goreng)</div><div class="fi-por">2 potong sedang</div></div><span class="fi-cal">120 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129388;</span><div class="fi-info"><div class="fi-name">Tahu putih bacem</div><div class="fi-por">2 potong</div></div><span class="fi-cal">60 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129361;</span><div class="fi-info"><div class="fi-name">Sayur bening bayam + jagung + wortel</div><div class="fi-por">1 mangkok besar</div></div><span class="fi-cal">50 kkal</span></div>
+        <div class="note-box"><strong>Menu hemat dan sehat</strong>Menu paling ekonomis dan tetap bergizi. Protein nabati dari tempe-tahu sangat cukup untuk makan malam. Rebus, jangan goreng!</div>
+      </div>
+    </div>
+
+    <div class="menu-card" data-mid="m5">
+      <div class="menu-hdr">
+        <div class="menu-ic" style="background:#FFF8EB">&#127858;</div>
+        <div class="menu-tw"><div class="menu-title">Salad Ayam Cesar Ala Rumahan</div><div class="menu-sub"><span class="menu-cal badge-west">Western</span></div></div>
+        <span class="menu-cal" style="background:#FFF8EB;color:#F5882A">300 kkal</span>
+        <button class="chk-m">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="menu-body">
+        <div class="fi"><span class="fi-em">&#127811;</span><div class="fi-info"><div class="fi-name">Selada romaine / selada hijau / kol</div><div class="fi-por">3 genggam besar</div></div><span class="fi-cal">20 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127831;</span><div class="fi-info"><div class="fi-name">Dada ayam panggang iris</div><div class="fi-por">100g</div></div><span class="fi-cal">165 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#129428;</span><div class="fi-info"><div class="fi-name">Telur rebus belah</div><div class="fi-por">1 butir</div></div><span class="fi-cal">70 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127834;</span><div class="fi-info"><div class="fi-name">Tomat ceri / tomat biasa</div><div class="fi-por">5-6 butir</div></div><span class="fi-cal">20 kkal</span></div>
+        <div class="fi"><span class="fi-em">&#127817;</span><div class="fi-info"><div class="fi-name">Dressing: lemon + olive oil + garam lada</div><div class="fi-por">1 sdt olive oil</div></div><span class="fi-cal">45 kkal</span></div>
+        <div class="note-box"><strong>Modifikasi lokal</strong>Selada bisa diganti kol iris tipis. Olive oil bisa diganti minyak kelapa. Ini makan malam sempurna: tinggi protein, serat tinggi, tanpa karbohidrat berat.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== PAGE ROTASI ======== -->
+<div id="pg-rotasi" class="page">
+  <div class="hero">
+    <h2>&#128197; Rotasi Menu Mingguan</h2>
+    <p>Jadwal makan Senin-Minggu agar tidak bosan dan gizi tetap beragam setiap hari</p>
+  </div>
+
+  <div class="week-grid" id="week-grid">
+    <!-- generated by JS -->
+  </div>
+</div>
+
+<!-- ======== PAGE TIPS ======== -->
+<div id="pg-tips" class="page">
+  <div class="sec-title">&#11088; Kiat Utama Diet Berhasil</div>
+  <div class="tip-card"><span class="tip-em">&#128343;</span><div><div class="tip-h">Intermittent Fasting 16:8</div><div class="tip-p">Makan hanya 07:00-19:00. Puasa 16 jam sisanya hanya air putih, teh, kopi tanpa gula. Terbukti efektif membakar lemak perut tanpa diet ketat.</div></div></div>
+  <div class="tip-card"><span class="tip-em">&#128167;</span><div><div class="tip-h">2 Gelas Air Sebelum Makan</div><div class="tip-p">Minum 2 gelas air 30 menit sebelum makan. Menurunkan asupan kalori rata-rata 13% per makan. Mudah tapi sangat efektif.</div></div></div>
+  <div class="tip-card"><span class="tip-em">&#127869;</span><div><div class="tip-h">Metode Piring T (Tumpeng)</div><div class="tip-p">1/2 piring sayur, 1/4 protein (ayam/ikan/tahu/tempe), 1/4 karbohidrat (nasi merah/kentang). Makan sayur dahulu sebelum nasi.</div></div></div>
+  <div class="tip-card"><span class="tip-em">&#128012;</span><div><div class="tip-h">Kunyah 20-30 Kali Per Suapan</div><div class="tip-p">Rasa kenyang baru tersampaikan ke otak setelah 20 menit. Makan pelan = makan lebih sedikit secara alami. Taruh sendok setelah tiap suapan.</div></div></div>
+  <div class="tip-card"><span class="tip-em">&#128564;</span><div><div class="tip-h">Tidur 7-8 Jam = Diet Alami</div><div class="tip-p">Kurang tidur meningkatkan hormon lapar (ghrelin) 24% dan menurunkan hormon kenyang (leptin). Ibu yang kurang tidur hampir pasti sulit kurus.</div></div></div>
+  <div class="tip-card"><span class="tip-em">&#128683;</span><div><div class="tip-h">Stop Minuman Manis Sepenuhnya</div><div class="tip-p">1 gelas teh manis = 150 kkal = 15 menit jalan cepat. Minuman manis adalah sabotase terbesar diet. Ganti dengan air putih, teh tawar, atau infused water.</div></div></div>
+  <div class="tip-card"><span class="tip-em">&#128247;</span><div><div class="tip-h">Foto Makanan Sebelum Makan</div><div class="tip-p">Memfoto makanan sebelum dimakan meningkatkan kesadaran porsi dan membuat lebih bertanggung jawab. Bisa disimpan sebagai food journal harian.</div></div></div>
+  <div class="tip-card"><span class="tip-em">&#128170;</span><div><div class="tip-h">Masak Batch di Akhir Pekan</div><div class="tip-p">Masak ayam/ikan dan nasi merah dalam jumlah besar setiap Minggu. Simpan di kulkas. Ini mencegah keputusan makan impulsif di hari sibuk.</div></div></div>
+
+  <div class="sec-title">&#10004; Lakukan &amp; Hindari</div>
+  <div class="do-dont">
+    <div class="do-box"><strong>Lakukan Ini</strong>
+      <div class="ddi"><span>&#10003;</span><span>Sarapan dalam 1 jam setelah bangun</span></div>
+      <div class="ddi"><span>&#10003;</span><span>Sayur di setiap waktu makan</span></div>
+      <div class="ddi"><span>&#10003;</span><span>Protein setiap makan (telur/ayam/ikan/tahu/tempe)</span></div>
+      <div class="ddi"><span>&#10003;</span><span>Makan malam sebelum jam 19:00</span></div>
+      <div class="ddi"><span>&#10003;</span><span>Siapkan snack sehat sebelum lapar</span></div>
+      <div class="ddi"><span>&#10003;</span><span>Timbang berat tiap Senin pagi</span></div>
+    </div>
+    <div class="dont-box"><strong>Hindari Ini</strong>
+      <div class="ddi"><span>&#10008;</span><span>Minuman manis dan soda</span></div>
+      <div class="ddi"><span>&#10008;</span><span>Gorengan dan makanan berminyak</span></div>
+      <div class="ddi"><span>&#10008;</span><span>Nasi putih porsi besar malam hari</span></div>
+      <div class="ddi"><span>&#10008;</span><span>Skip makan (membuat lapar brutal)</span></div>
+      <div class="ddi"><span>&#10008;</span><span>Makan sambil main HP / nonton</span></div>
+      <div class="ddi"><span>&#10008;</span><span>Diet ekstrem turun cepat (yo-yo)</span></div>
+    </div>
+  </div>
+
+  <div class="sec-title">&#128197; Target Realistis</div>
+  <div class="info-card">
+    <h3>Turun 0,5 - 1 kg per Minggu</h3>
+    <p>Penurunan ideal adalah 0,5-1 kg/minggu. Turun lebih cepat justru berbahaya karena tubuh membakar otot bukan lemak. Dengan target 11 kg, estimasi <strong>3-4 bulan</strong> adalah sangat sehat dan tidak akan yo-yo kembali.</p><br>
+    <p style="color:var(--pink);font-weight:700">Ingat: Ini perubahan gaya hidup permanen, bukan diet sesaat. &#127800;</p>
+  </div>
+</div>
+
+<!-- ======== PAGE BERAT ======== -->
+<div id="pg-berat" class="page">
+  <div class="hero">
+    <h2>&#9878; Monitor Berat Badan</h2>
+    <p>Timbang setiap Senin pagi. Catat perjalanan menuju 60 kg.</p>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-num" id="w-cur">71</div><div class="hstat-lbl">Kini (kg)</div></div>
+      <div class="hstat"><div class="hstat-num">60</div><div class="hstat-lbl">Target (kg)</div></div>
+      <div class="hstat"><div class="hstat-num" id="w-sisa">11</div><div class="hstat-lbl">Sisa (kg)</div></div>
+    </div>
+  </div>
+  <div class="progress-target">
+    <h3>Progres Menuju Target 60 kg</h3>
+    <div class="target-bar-wrap"><div class="target-bar" id="tgt-bar" style="width:0%"></div></div>
+    <div class="target-labels"><span>71 kg</span><span id="tgt-pct">0%</span><span>60 kg</span></div>
+  </div>
+  <div class="weight-form">
+    <h3>Catat Berat Badan</h3>
+    <div class="w-input-row">
+      <input type="number" class="w-input" id="w-input" placeholder="Contoh: 70.5" step="0.1" min="40" max="150">
+      <button class="btn-save-w" id="btn-save-w">Simpan</button>
+    </div>
+  </div>
+  <div class="sec-title">Riwayat Berat Badan</div>
+  <div id="w-list"></div>
+</div>
+
+<!-- ======== PAGE RIWAYAT ======== -->
+<div id="pg-riwayat" class="page">
+  <div class="rw-banner">
+    <h3 id="rw-lbl">Hari ini</h3>
+    <p id="rw-sub">Memuat...</p>
+  </div>
+  <div class="streak-row">
+    <div class="streak-card"><div class="streak-num" id="rw-hari">0</div><div class="streak-lbl">Hari Aktif</div></div>
+    <div class="streak-card"><div class="streak-num" id="rw-total">0</div><div class="streak-lbl">Total Menu</div></div>
+    <div class="streak-card"><div class="streak-num" id="rw-avg">0</div><div class="streak-lbl">Rata-rata/Hari</div></div>
+  </div>
+  <div class="rw-hdr2"><h2>Riwayat Menu Harian</h2><button class="btn-clear" id="btn-clear">Hapus Semua</button></div>
+  <div id="rw-list"></div>
+</div>
+</main>
+
+<div id="statbar">
+  <div class="stat-item"><div class="stat-num" id="s-done">0</div><div class="stat-lbl">Selesai</div></div>
+  <div class="stat-item"><div class="stat-num" id="s-total">-</div><div class="stat-lbl">Total Menu</div></div>
+  <div class="stat-item"><div class="stat-num" id="s-pct">0%</div><div class="stat-lbl">Progress</div></div>
+  <button class="btn-reset" id="btn-reset">Reset</button>
+</div>
+
+<script>
+(function(){
+  var DAYS   = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+  var MONTHS = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+
+  var MENU_LABELS = {
+    s1:'Sarapan: Nasi Uduk Sehat + Telur Balado',
+    s2:'Sarapan: Oatmeal Pisang Madu',
+    s3:'Sarapan: Bubur Ayam Sehat',
+    s4:'Sarapan: Smoothie Bowl Tropis',
+    sp1:'Snack Pagi: Buah + Kacang',
+    sp2:'Snack Pagi: Tahu Tempe Kukus',
+    sp3:'Snack Pagi: Roti Gandum + Selai Kacang',
+    l1:'Siang: Ayam Bakar + Nasi Merah + Lalapan',
+    l2:'Siang: Gado-Gado Sehat',
+    l3:'Siang: Soto Ayam Bening',
+    l4:'Siang: Salmon/Tuna Bowl',
+    l5:'Siang: Pecel Sayur + Nasi Merah',
+    ss1:'Snack Sore: Greek Yogurt + Buah',
+    ss2:'Snack Sore: Rujak Buah Segar',
+    ss3:'Snack Sore: Teh Herbal + Pisang Rebus',
+    m1:'Malam: Ikan Bakar + Sup Sayur',
+    m2:'Malam: Tumis Ayam Capcay',
+    m3:'Malam: Sup Salmon Tofu',
+    m4:'Malam: Tempe Tahu Bacem + Sayur Bening',
+    m5:'Malam: Salad Ayam Cesar'
+  };
+
+  var ROTASI = [
+    {day:'Senin',    theme:'Energi Tinggi - Indonesia',    color:'#F5882A',
+     meals:['Sarapan: Nasi Uduk Sehat + Telur Balado (340 kkal)','Snack: Buah + Almond (150 kkal)','Siang: Ayam Bakar + Nasi Merah + Lalapan (420 kkal)','Snack: Rujak Buah (130 kkal)','Malam: Ikan Bakar + Sup Sayur Bening (280 kkal)','Total: ~1.320 kkal']},
+    {day:'Selasa',   theme:'Fusion Day - Indonesia+Western',color:'#9B59B6',
+     meals:['Sarapan: Oatmeal Pisang Madu (310 kkal)','Snack: Tahu Tempe Kukus (140 kkal)','Siang: Salmon/Tuna Bowl (430 kkal)','Snack: Greek Yogurt + Buah (160 kkal)','Malam: Salad Ayam Cesar (300 kkal)','Total: ~1.340 kkal']},
+    {day:'Rabu',     theme:'Sayuran Hijau - Indonesia',    color:'#3DAA6E',
+     meals:['Sarapan: Bubur Ayam Sehat (330 kkal)','Snack: Pisang + Almond (150 kkal)','Siang: Gado-Gado Sehat (390 kkal)','Snack: Teh Herbal + Pisang Rebus (110 kkal)','Malam: Tumis Ayam Capcay (260 kkal)','Total: ~1.240 kkal']},
+    {day:'Kamis',    theme:'Protein Power - Mix',          color:'#3498DB',
+     meals:['Sarapan: Smoothie Bowl Tropis (290 kkal)','Snack: Roti Gandum + Selai Kacang (170 kkal)','Siang: Soto Ayam Bening + Nasi Merah (380 kkal)','Snack: Rujak Buah (130 kkal)','Malam: Sup Salmon Tofu (270 kkal)','Total: ~1.240 kkal']},
+    {day:'Jumat',    theme:'Hemat Bergizi - Indonesia',    color:'#E75480',
+     meals:['Sarapan: Nasi Uduk Sehat + Telur (340 kkal)','Snack: Buah Segar (100 kkal)','Siang: Pecel Sayur + Nasi Merah (370 kkal)','Snack: Greek Yogurt (160 kkal)','Malam: Tempe Tahu Bacem + Sayur Bening (250 kkal)','Total: ~1.220 kkal']},
+    {day:'Sabtu',    theme:'Weekend Spesial - Mix',        color:'#F5882A',
+     meals:['Sarapan: Oatmeal Pisang Madu (310 kkal)','Snack: Tahu Tempe (140 kkal)','Siang: Ayam Bakar + Lalapan (420 kkal)','Snack: Buah + Kacang (150 kkal)','Malam: Ikan Bakar + Sup (280 kkal)','Total: ~1.300 kkal']},
+    {day:'Minggu',   theme:'Santai & Sehat - Bebas Pilih', color:'#9B59B6',
+     meals:['Sarapan: Pilih favorit dari menu sarapan','Snack: Pilih favorit snack pagi','Siang: Pilih menu siang favorit minggu ini','Snack: Pilih favorit snack sore','Malam: Menu malam paling disukai','Catatan: Bebas pilih tapi tetap dalam 1.400 kkal']}
+  ];
+
+  /* helpers */
+  function todayKey() {
+    var d=new Date(), m=d.getMonth()+1, dd=d.getDate();
+    return d.getFullYear()+'-'+(m<10?'0':'')+m+'-'+(dd<10?'0':'')+dd;
+  }
+  function fmtKey(k) {
+    var p=k.split('-'), d=new Date(+p[0],+p[1]-1,+p[2]);
+    var tk=todayKey();
+    var base=DAYS[d.getDay()]+', '+d.getDate()+' '+MONTHS[d.getMonth()]+' '+p[0];
+    if(k===tk) return 'Hari Ini - '+base;
+    var yd=new Date(); yd.setDate(yd.getDate()-1);
+    var yk=yd.getFullYear()+'-'+(yd.getMonth()+1<10?'0':'')+(yd.getMonth()+1)+'-'+(yd.getDate()<10?'0':'')+yd.getDate();
+    if(k===yk) return 'Kemarin - '+base;
+    return base;
+  }
+  function lsG(k){try{return JSON.parse(localStorage.getItem(k)||'null');}catch(e){return null;}}
+  function lsS(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+  function lsD(k){try{localStorage.removeItem(k);}catch(e){}}
+  function allDietKeys(){
+    var out=[];
+    for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k&&k.indexOf('dt_')===0)out.push(k);}
+    out.sort(function(a,b){return a>b?-1:1;});
+    return out;
+  }
+
+  /* count visible chk-m */
+  function countTotal(){return document.querySelectorAll('.chk-m').length;}
+
+  /* save/load */
+  function saveDone(){
+    var ids=[];
+    var btns=document.querySelectorAll('.chk-m');
+    for(var i=0;i<btns.length;i++){if(btns[i].classList.contains('done')){var mid=btns[i].closest('.menu-card');if(mid)ids.push(mid.getAttribute('data-mid'));}}
+    var k='dt_'+todayKey();
+    if(ids.length>0) lsS(k,ids); else lsD(k);
+  }
+  var savedMids=lsG('dt_'+todayKey())||[];
+  var allCards=document.querySelectorAll('.menu-card');
+  for(var i=0;i<allCards.length;i++){
+    var mid=allCards[i].getAttribute('data-mid');
+    if(savedMids.indexOf(mid)!==-1){
+      var chk=allCards[i].querySelector('.chk-m');
+      if(chk) chk.classList.add('done');
+    }
+  }
+
+  /* progress */
+  function updateProgress(){
+    var done=document.querySelectorAll('.chk-m.done').length;
+    var total=countTotal();
+    var pct=total>0?Math.round(done/total*100):0;
+    document.getElementById('s-done').textContent=done;
+    document.getElementById('s-total').textContent=total;
+    document.getElementById('s-pct').textContent=pct+'%';
+    document.getElementById('prog-bar').style.width=pct+'%';
+    document.getElementById('prog-txt').textContent=done+' menu selesai hari ini';
+  }
+  updateProgress();
+
+  /* build rotasi */
+  var wg=document.getElementById('week-grid');
+  var todayDow=new Date().getDay();
+  var dowMap={1:0,2:1,3:2,4:3,5:4,6:5,0:6};
+  var todayRot=dowMap[todayDow];
+  for(var ri=0;ri<ROTASI.length;ri++){
+    var rot=ROTASI[ri];
+    var bid='wr'+ri;
+    var isToday=(ri===todayRot);
+    var row=document.createElement('div');
+    row.className='week-row';
+    var hdr='<div class="week-row-hdr" onclick="var b=document.getElementById(\''+bid+'\');b.style.display=b.style.display===\'block\'?\'none\':\'block\'">'
+      +'<div class="week-day" style="color:'+rot.color+'">'+rot.day+(isToday?' &#9679;':'')+'</div>'
+      +'<div class="week-theme">'+rot.theme+'</div>'
+      +(isToday?'<span class="week-badge" style="background:'+rot.color+';color:#fff">Hari ini</span>':'')
+      +'</div>';
+    var body='<div id="'+bid+'" class="week-body" style="display:'+(isToday?'block':'none')+'">';
+    for(var mi=0;mi<rot.meals.length;mi++){
+      var isTot=(mi===rot.meals.length-1);
+      body+='<div class="week-meal" style="'+(isTot?'background:#FFF5F8;border-radius:8px;padding:8px;margin-top:4px':'')+'"><div class="week-meal-name" style="'+(isTot?'color:var(--pink);font-weight:800':'')+'">'+rot.meals[mi]+'</div></div>';
+    }
+    body+='</div>';
+    row.innerHTML=hdr+body;
+    wg.appendChild(row);
+  }
+
+  /* nav */
+  var navBtns=document.querySelectorAll('.nav-btn');
+  for(var n=0;n<navBtns.length;n++){
+    (function(btn){
+      btn.addEventListener('click',function(){
+        for(var j=0;j<navBtns.length;j++) navBtns[j].classList.remove('active');
+        var pgs=document.querySelectorAll('.page');
+        for(var j=0;j<pgs.length;j++) pgs[j].classList.remove('active');
+        btn.classList.add('active');
+        var pid=btn.getAttribute('data-page');
+        document.getElementById(pid).classList.add('active');
+        if(pid==='pg-riwayat') renderRiwayat();
+        if(pid==='pg-berat') renderWeightList();
+        window.scrollTo(0,0);
+      });
+    })(navBtns[n]);
+  }
+
+  /* menu card toggle */
+  var mhdrs=document.querySelectorAll('.menu-hdr');
+  for(var mh=0;mh<mhdrs.length;mh++){
+    (function(hdr){
+      hdr.addEventListener('click',function(e){
+        var t=e.target;
+        while(t&&t!==hdr){if(t.classList&&t.classList.contains('chk-m'))return;t=t.parentNode;}
+        var body=hdr.nextElementSibling;
+        var open=body.classList.contains('show');
+        body.classList[open?'remove':'add']('show');
+        hdr.classList[open?'remove':'add']('open');
+      });
+    })(mhdrs[mh]);
+  }
+
+  /* chk-m buttons */
+  var chkBtns=document.querySelectorAll('.chk-m');
+  for(var c=0;c<chkBtns.length;c++){
+    (function(btn){
+      btn.addEventListener('click',function(e){
+        e.stopPropagation();
+        btn.classList[btn.classList.contains('done')?'remove':'add']('done');
+        saveDone();
+        updateProgress();
+      });
+    })(chkBtns[c]);
+  }
+
+  /* reset */
+  document.getElementById('btn-reset').addEventListener('click',function(){
+    if(!confirm('Reset checklist hari ini?')) return;
+    var btns=document.querySelectorAll('.chk-m');
+    for(var i=0;i<btns.length;i++) btns[i].classList.remove('done');
+    saveDone(); updateProgress();
+  });
+
+  /* weight */
+  function renderWeightList(){
+    var entries=lsG('w_entries')||[];
+    var list=document.getElementById('w-list');
+    if(entries.length===0){
+      list.innerHTML='<div class="empty-state"><div class="es-icon">&#9878;</div><p>Belum ada data.<br>Mulai catat sekarang!</p></div>';
+      updateWeightUI(71); return;
+    }
+    updateWeightUI(entries[entries.length-1].w);
+    var html='<div class="info-card">';
+    for(var i=entries.length-1;i>=0;i--){
+      var e=entries[i], prev=i>0?entries[i-1].w:71;
+      var diff=(e.w-prev), diffHtml='';
+      if(diff<0) diffHtml='<span class="w-diff w-down">'+diff.toFixed(1)+'kg</span>';
+      else if(diff>0) diffHtml='<span class="w-diff w-up">+'+diff.toFixed(1)+'kg</span>';
+      else diffHtml='<span class="w-diff w-same">tetap</span>';
+      html+='<div class="weight-entry"><div><div style="font-weight:700">'+e.w+' kg</div><div class="w-date">'+e.date+'</div></div>'+diffHtml+'</div>';
+    }
+    html+='</div>';
+    list.innerHTML=html;
+  }
+  function updateWeightUI(cur){
+    var sisa=Math.max(0,(cur-60)).toFixed(1);
+    var pct=Math.max(0,Math.min(100,Math.round((71-cur)/11*100)));
+    document.getElementById('w-cur').textContent=cur;
+    document.getElementById('w-sisa').textContent=sisa;
+    document.getElementById('tgt-bar').style.width=pct+'%';
+    document.getElementById('tgt-pct').textContent=pct+'%';
+  }
+  document.getElementById('btn-save-w').addEventListener('click',function(){
+    var val=parseFloat(document.getElementById('w-input').value);
+    if(isNaN(val)||val<30||val>200){alert('Masukkan berat yang valid (contoh: 70.5)');return;}
+    var entries=lsG('w_entries')||[];
+    var now=new Date();
+    entries.push({w:val,date:DAYS[now.getDay()]+', '+now.getDate()+' '+MONTHS[now.getMonth()]+' '+now.getFullYear()});
+    lsS('w_entries',entries);
+    document.getElementById('w-input').value='';
+    renderWeightList();
+  });
+
+  /* riwayat */
+  function renderRiwayat(){
+    var keys=allDietKeys();
+    var tot=0;
+    for(var i=0;i<keys.length;i++) tot+=(lsG(keys[i])||[]).length;
+    document.getElementById('rw-hari').textContent=keys.length;
+    document.getElementById('rw-total').textContent=tot;
+    document.getElementById('rw-avg').textContent=keys.length>0?Math.round(tot/keys.length):0;
+    var todayIds=lsG('dt_'+todayKey())||[];
+    var now=new Date();
+    document.getElementById('rw-lbl').textContent=DAYS[now.getDay()]+', '+now.getDate()+' '+MONTHS[now.getMonth()]+' '+now.getFullYear();
+    document.getElementById('rw-sub').textContent=todayIds.length>0?todayIds.length+' menu dijalankan hari ini':'Belum ada menu yang dicatat hari ini';
+    var list=document.getElementById('rw-list');
+    if(keys.length===0){list.innerHTML='<div class="empty-state"><div class="es-icon">&#128203;</div><p>Belum ada riwayat.<br>Centang menu di tab Menu<br>untuk mulai mencatat!</p></div>';return;}
+    list.innerHTML='';
+    for(var ki=0;ki<keys.length;ki++){
+      var mids=lsG(keys[ki])||[];
+      if(mids.length===0) continue;
+      var dk=keys[ki].replace('dt_','');
+      var lbl=fmtKey(dk);
+      var bid='rv'+ki;
+      var card=document.createElement('div');
+      card.className='date-card';
+      var html='<div class="date-hdr" onclick="var b=document.getElementById(\''+bid+'\');b.style.display=b.style.display===\'block\'?\'none\':\'block\'">'
+        +'<div><div class="date-lbl">'+lbl+'</div><div class="date-sub">'+mids.length+' menu selesai</div></div>'
+        +'<span class="date-badge2">'+mids.length+'</span></div>';
+      html+='<div id="'+bid+'" class="date-body" style="display:'+(ki===0?'block':'none')+'">';
+      for(var j=0;j<mids.length;j++){
+        var lbl2=MENU_LABELS[mids[j]]||mids[j];
+        html+='<div class="rw-item"><div class="rw-dot"></div><div>'+lbl2+'</div></div>';
+      }
+      html+='</div>';
+      card.innerHTML=html;
+      list.appendChild(card);
+    }
+  }
+
+  document.getElementById('btn-clear').addEventListener('click',function(){
+    if(!confirm('Hapus semua riwayat diet?')) return;
+    var keys=allDietKeys();
+    for(var i=0;i<keys.length;i++) lsD(keys[i]);
+    renderRiwayat();
+  });
+
+  renderWeightList();
+})();
+</script>
+</body>
+</html>
