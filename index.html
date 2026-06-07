@@ -173,6 +173,28 @@ main{max-width:700px;margin:0 auto;padding:16px 14px 90px}
   #statbar{padding-bottom:calc(10px + env(safe-area-inset-bottom))}
   main{padding-bottom:calc(90px + env(safe-area-inset-bottom))}
 }
+
+/* EXERCISE PAGE */
+.ex-card{background:#fff;border:1.5px solid var(--border);border-radius:16px;margin-bottom:10px;overflow:hidden}
+.ex-hdr{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;min-height:54px}
+.ex-ic{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.ex-tw{flex:1;min-width:0}
+.ex-title{font-family:'Nunito',sans-serif;font-weight:700;font-size:14px}
+.ex-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.ex-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px;flex-shrink:0;white-space:nowrap}
+.ex-body{display:none;padding:0 14px 14px;border-top:1.5px solid var(--border)}
+.ex-body.show{display:block}
+.ex-step{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;align-items:flex-start}
+.ex-step:last-child{border-bottom:none}
+.ex-num{width:24px;height:24px;border-radius:50%;background:var(--pink);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-family:'Nunito',sans-serif}
+.ex-dur{display:inline-block;background:#2D1A20;color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:99px;margin-bottom:4px;font-family:'Nunito',sans-serif}
+.jadwal-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.jadwal-item{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:12px;text-align:center}
+.jadwal-day{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;margin-bottom:4px}
+.jadwal-type{font-size:11px;color:var(--muted)}
+.jadwal-kkal{font-size:12px;font-weight:700;margin-top:6px;padding:3px 8px;border-radius:99px;display:inline-block}
+.chk-ex{width:30px;height:30px;border-radius:50%;border:2px solid var(--border);background:var(--bg);color:#ccc;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.chk-ex.done{background:#3DAA6E;border-color:#3DAA6E;color:#fff}
 </style>
 </head>
 <body>
@@ -190,6 +212,7 @@ main{max-width:700px;margin:0 auto;padding:16px 14px 90px}
   <div class="nav">
     <button class="nav-btn active" data-page="pg-menu">&#127828; Menu</button>
     <button class="nav-btn" data-page="pg-rotasi">&#128197; Rotasi</button>
+    <button class="nav-btn" data-page="pg-gerak">&#127939; Gerak</button>
     <button class="nav-btn" data-page="pg-tips">&#128161; Tips</button>
     <button class="nav-btn" data-page="pg-berat">&#9878; Berat</button>
     <button class="nav-btn" data-page="pg-riwayat">&#128203; Riwayat</button>
@@ -568,6 +591,138 @@ main{max-width:700px;margin:0 auto;padding:16px 14px 90px}
   </div>
 </div>
 
+
+<!-- ======== PAGE GERAK ======== -->
+<div id="pg-gerak" class="page">
+  <div class="hero">
+    <h2>&#127939; Olahraga 30 Menit/Hari</h2>
+    <p>Dirancang untuk ibu sibuk. Semua bisa dilakukan di rumah, tanpa alat khusus, sambil jaga anak.</p>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-num">30'</div><div class="hstat-lbl">Per Hari</div></div>
+      <div class="hstat"><div class="hstat-num">5x</div><div class="hstat-lbl">Per Minggu</div></div>
+      <div class="hstat"><div class="hstat-num">~250</div><div class="hstat-lbl">Kkal Terbakar</div></div>
+    </div>
+  </div>
+
+  <div class="sec-title">&#128197; Jadwal Mingguan</div>
+  <div class="jadwal-grid">
+    <div class="jadwal-item"><div class="jadwal-day" style="color:#E75480">Senin</div><div class="jadwal-type">Zumba / Dance</div><div class="jadwal-kkal" style="background:#FFF0EB;color:#E75480">~250 kkal</div></div>
+    <div class="jadwal-item"><div class="jadwal-day" style="color:#3DAA6E">Selasa</div><div class="jadwal-type">Yoga + Core</div><div class="jadwal-kkal" style="background:#EDF8F1;color:#3DAA6E">~200 kkal</div></div>
+    <div class="jadwal-item"><div class="jadwal-day" style="color:#3498DB">Rabu</div><div class="jadwal-type">Zumba / Dance</div><div class="jadwal-kkal" style="background:#EBF6FB;color:#3498DB">~250 kkal</div></div>
+    <div class="jadwal-item"><div class="jadwal-day" style="color:#9B59B6">Kamis</div><div class="jadwal-type">Yoga + Core</div><div class="jadwal-kkal" style="background:#F7EDFB;color:#9B59B6">~200 kkal</div></div>
+    <div class="jadwal-item"><div class="jadwal-day" style="color:#F5882A">Jumat</div><div class="jadwal-type">Jalan Kaki Cepat</div><div class="jadwal-kkal" style="background:#FFF8EB;color:#F5882A">~180 kkal</div></div>
+    <div class="jadwal-item"><div class="jadwal-day" style="color:#E75480">Sabtu</div><div class="jadwal-type">Full Body di Rumah</div><div class="jadwal-kkal" style="background:#FFF0EB;color:#E75480">~300 kkal</div></div>
+    <div class="jadwal-item" style="grid-column:1/-1"><div class="jadwal-day" style="color:#3DAA6E">Minggu</div><div class="jadwal-type">Istirahat Aktif (jalan santai + peregangan)</div><div class="jadwal-kkal" style="background:#EDF8F1;color:#3DAA6E">~100 kkal</div></div>
+  </div>
+
+  <div class="sec-title">&#128293; Program Latihan Detail</div>
+
+  <!-- SENIN RABU: ZUMBA -->
+  <div class="ex-card">
+    <div class="ex-hdr">
+      <div class="ex-ic" style="background:#FFF0EB">&#128131;</div>
+      <div class="ex-tw">
+        <div class="ex-title">Senin &amp; Rabu: Zumba / Dance Cardio</div>
+        <div class="ex-sub">Kardio menyenangkan, bakar lemak perut dan paha</div>
+      </div>
+      <span class="ex-badge" style="background:#FFF0EB;color:#E75480">~250 kkal</span>
+      <button class="chk-ex" data-exid="ex-senin">&#10003;</button>
+      <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <div class="ex-body">
+      <div class="ex-step"><div class="ex-num">1</div><div><div class="ex-dur">5 menit - Pemanasan</div>Jalan di tempat sambil ayun tangan. Putar pinggang kanan-kiri 20x. Peregangan leher dan bahu. Lutut tinggi 30x bergantian.</div></div>
+      <div class="ex-step"><div class="ex-num">2</div><div><div class="ex-dur">20 menit - Zumba / Joget</div>Cari video "Zumba 20 menit pemula" di YouTube, atau putar lagu favorit dan gerakkan seluruh tubuh bebas! Fokus gerakan pinggul, tangan, dan kaki. Tidak harus sempurna, yang penting bergerak dan berkeringat.</div></div>
+      <div class="ex-step"><div class="ex-num">3</div><div><div class="ex-dur">5 menit - Pendinginan</div>Jalan pelan sambil tarik napas dalam. Peregangan paha depan, betis, pinggang, dan lengan. Tahan tiap gerakan 15-20 detik.</div></div>
+      <div class="note-box"><strong>Tips untuk ibu sibuk</strong>Lakukan saat anak tidur siang atau setelah anak tidur malam. Tidak perlu pakaian olahraga khusus. Alas kaki yang nyaman sudah cukup. Musik yang seru = semangat yang terjaga!</div>
+    </div>
+  </div>
+
+  <!-- SELASA KAMIS: YOGA + CORE -->
+  <div class="ex-card">
+    <div class="ex-hdr">
+      <div class="ex-ic" style="background:#EDF8F1">&#129340;</div>
+      <div class="ex-tw">
+        <div class="ex-title">Selasa &amp; Kamis: Yoga + Latihan Core</div>
+        <div class="ex-sub">Kencangkan perut, pinggang, dan bokong pasca melahirkan</div>
+      </div>
+      <span class="ex-badge" style="background:#EDF8F1;color:#3DAA6E">~200 kkal</span>
+      <button class="chk-ex" data-exid="ex-selasa">&#10003;</button>
+      <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <div class="ex-body">
+      <div class="ex-step"><div class="ex-num">1</div><div><div class="ex-dur">5 menit - Pemanasan Yoga</div>Cat-cow pose 10x (merangkak, punggung naik-turun). Child's pose tahan 30 detik. Downward dog tahan 30 detik. Tarik napas dalam 5x.</div></div>
+      <div class="ex-step"><div class="ex-num">2</div><div><div class="ex-dur">15 menit - Core Workout</div>
+        Plank (lutut boleh) 30 detik x 3 set | istirahat 20 detik<br/>
+        Crunch 15x x 3 set | istirahat 20 detik<br/>
+        Bicycle crunch 20x x 3 set | istirahat 20 detik<br/>
+        Glute bridge 15x x 3 set | istirahat 20 detik<br/>
+        Dead bug 10x x 2 set (bagus untuk perut pasca melahirkan)
+      </div></div>
+      <div class="ex-step"><div class="ex-num">3</div><div><div class="ex-dur">10 menit - Yoga Ringan</div>Warrior I pose tahan 30 detik/sisi. Tree pose tahan 20 detik/sisi. Bridge pose tahan 30 detik. Supine twist (berbaring, lutut ke samping) tahan 30 detik/sisi. Savasana 2 menit.</div></div>
+      <div class="note-box"><strong>Manfaat khusus ibu</strong>Yoga + core sangat efektif mengencangkan perut buncit setelah melahirkan (diastasis recti). Dead bug dan glute bridge aman untuk ibu post-partum. Postur tubuh juga membaik drastis!</div>
+    </div>
+  </div>
+
+  <!-- JUMAT: JALAN KAKI -->
+  <div class="ex-card">
+    <div class="ex-hdr">
+      <div class="ex-ic" style="background:#FFF8EB">&#128694;</div>
+      <div class="ex-tw">
+        <div class="ex-title">Jumat: Jalan Kaki Cepat</div>
+        <div class="ex-sub">Bisa sambil bawa anak jalan-jalan sore</div>
+      </div>
+      <span class="ex-badge" style="background:#FFF8EB;color:#F5882A">~180 kkal</span>
+      <button class="chk-ex" data-exid="ex-jumat">&#10003;</button>
+      <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <div class="ex-body">
+      <div class="ex-step"><div class="ex-num">1</div><div><div class="ex-dur">5 menit - Jalan Santai</div>Jalan pelan sebagai pemanasan. Ayun tangan lebar. Tarik napas panjang dan teratur.</div></div>
+      <div class="ex-step"><div class="ex-num">2</div><div><div class="ex-dur">20 menit - Jalan Cepat</div>Kecepatan sedang-cepat, sedikit ngos-ngosan tapi masih bisa bicara. Target 2-3 km. Postur tegak, perut dikencangkan, ayunan tangan aktif. Bisa sambil dorong stroller atau gendong anak!</div></div>
+      <div class="ex-step"><div class="ex-num">3</div><div><div class="ex-dur">5 menit - Pendinginan</div>Jalan santai. Peregangan betis (tahan 20 detik/kaki), paha depan, paha belakang. Tarik napas dalam 5x.</div></div>
+      <div class="note-box"><strong>Tips tambahan</strong>Parkir lebih jauh dari biasanya. Naik tangga bukan lift. Target 7.000-8.000 langkah/hari total. Gunakan pedometer HP untuk memantau. Setiap langkah ekstra membantu membakar lemak!</div>
+    </div>
+  </div>
+
+  <!-- SABTU: FULL BODY -->
+  <div class="ex-card">
+    <div class="ex-hdr">
+      <div class="ex-ic" style="background:#F7EDFB">&#128170;</div>
+      <div class="ex-tw">
+        <div class="ex-title">Sabtu: Full Body di Rumah</div>
+        <div class="ex-sub">Tanpa alat, efektif membakar lemak seluruh tubuh</div>
+      </div>
+      <span class="ex-badge" style="background:#F7EDFB;color:#9B59B6">~300 kkal</span>
+      <button class="chk-ex" data-exid="ex-sabtu">&#10003;</button>
+      <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <div class="ex-body">
+      <div class="ex-step"><div class="ex-num">1</div><div><div class="ex-dur">5 menit - Pemanasan</div>Jumping jack 30x. High knee 30x bergantian. Arm circle depan-belakang 15x. Hip circle 10x tiap arah.</div></div>
+      <div class="ex-step"><div class="ex-num">2</div><div><div class="ex-dur">20 menit - Sirkuit 3 Putaran</div>
+        Squat 15x (kencangkan bokong) | 30 detik istirahat<br/>
+        Push-up dengan lutut 10x | 30 detik istirahat<br/>
+        Lunges 10x tiap kaki | 30 detik istirahat<br/>
+        Glute bridge 15x | 30 detik istirahat<br/>
+        Mountain climber 20x | 1 menit istirahat antar putaran<br/>
+        Ulangi 3 putaran total
+      </div></div>
+      <div class="ex-step"><div class="ex-num">3</div><div><div class="ex-dur">5 menit - Pendinginan</div>Peregangan menyeluruh: leher, bahu, dada, pinggang, paha, betis. Tahan tiap gerakan 20 detik. Akhiri dengan tarik napas dalam 5x sambil meditasi singkat.</div></div>
+      <div class="note-box"><strong>Catatan penting</strong>Push-up dengan lutut di lantai itu SAH dan efektif! Semua gerakan bisa dimodifikasi sesuai kemampuan saat ini. Konsisten 4 minggu maka kekuatan akan meningkat drastis. Yang penting tidak berhenti!</div>
+    </div>
+  </div>
+
+  <!-- MINGGU: ISTIRAHAT -->
+  <div class="info-card" style="background:#EDF8F1;border-color:#B8E6CC;margin-top:4px">
+    <h3>&#128564; Minggu: Istirahat Aktif</h3>
+    <p>Jalan santai 15-20 menit, peregangan ringan, atau bermain aktif bersama anak. Tubuh butuh recovery untuk memperbaiki otot dan membakar lemak lebih optimal. Tidur 7-8 jam malam sangat mempengaruhi keberhasilan diet dan olahraga!</p>
+  </div>
+
+  <div class="sec-title">&#128161; Tips Olahraga untuk Ibu</div>
+  <div class="tip-card"><span class="tip-em">&#8987;</span><div><div class="tip-h">Konsistensi &gt; Intensitas</div><div class="tip-p">Olahraga 30 menit tiap hari lebih baik dari 2 jam seminggu sekali. Mulai kecil dan konsisten. Setelah 3-4 minggu akan terasa lebih mudah dan jadi kebiasaan.</div></div></div>
+  <div class="tip-card"><span class="tip-em">&#127860;</span><div><div class="tip-h">Makan 1-2 Jam Sebelum Olahraga</div><div class="tip-p">Jangan olahraga perut kosong — bisa lemas dan tidak efektif. Makan snack ringan 1 jam sebelum: pisang, roti gandum, atau segenggam kacang.</div></div></div>
+  <div class="tip-card"><span class="tip-em">&#128167;</span><div><div class="tip-h">Minum Air Sebelum, Selama, Sesudah</div><div class="tip-p">Minum 1 gelas sebelum olahraga, teguk sedikit setiap 10 menit, dan 2 gelas setelah selesai. Dehidrasi membuat olahraga terasa berat dan hasil tidak maksimal.</div></div></div>
+  <div class="tip-card"><span class="tip-em">&#128170;</span><div><div class="tip-h">Libatkan Anak dalam Olahraga</div><div class="tip-p">Ajak anak jadi "asisten" olahraga! Squat sambil gendong anak, joget bersama, jalan-jalan sore bersama. Ini memecahkan masalah tidak punya waktu sekaligus bonding bersama si kecil.</div></div></div>
+</div>
+
 <!-- ======== PAGE ROTASI ======== -->
 <div id="pg-rotasi" class="page">
   <div class="hero">
@@ -939,6 +1094,36 @@ main{max-width:700px;margin:0 auto;padding:16px 14px 90px}
   });
 
   renderWeightList();
+
+  /* exercise check buttons */
+  var exBtns = document.querySelectorAll('.chk-ex');
+  for (var ei = 0; ei < exBtns.length; ei++) {
+    (function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        btn.classList[btn.classList.contains('done') ? 'remove' : 'add']('done');
+      });
+    })(exBtns[ei]);
+  }
+
+  /* exercise card toggle */
+  var exHdrs = document.querySelectorAll('.ex-hdr');
+  for (var eh = 0; eh < exHdrs.length; eh++) {
+    (function(hdr) {
+      hdr.addEventListener('click', function(e) {
+        var t = e.target;
+        while (t && t !== hdr) {
+          if (t.classList && t.classList.contains('chk-ex')) return;
+          t = t.parentNode;
+        }
+        var body = hdr.nextElementSibling;
+        var open = body.classList.contains('show');
+        body.classList[open ? 'remove' : 'add']('show');
+        hdr.classList[open ? 'remove' : 'add']('open');
+      });
+    })(exHdrs[eh]);
+  }
+
 })();
 </script>
 </body>
