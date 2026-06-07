@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#E75480">
+<title>Panduan Diet Sehat Ibu</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Nunito Sans',sans-serif;background:#FFF5F8;color:#2D1A20;min-height:100vh}
+button{font-family:'Nunito Sans',sans-serif;touch-action:manipulation;cursor:pointer}
+
+/* COLORS */
+:root{
+  --pink:#E75480;--pink2:#FF8FAB;--green:#3DAA6E;--orange:#F5882A;
+  --purple:#9B59B6;--blue:#3498DB;--red:#E74C3C;
+  --bg:#FFF5F8;--surface:#fff;--border:#F5DDE5;--text:#2D1A20;--muted:#9A7A82;
+}
+
+/* HEADER */
+#hdr{background:#fff;border-bottom:2px solid var(--border);padding:14px 16px 0;position:sticky;top:0;z-index:100;box-shadow:0 2px 16px rgba(0,0,0,.05)}
+.hrow{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-ic{width:38px;height:38px;background:linear-gradient(135deg,#E75480,#FF8FAB);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.logo-t h1{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;line-height:1.1}
+.logo-t p{font-size:11px;color:var(--muted);font-weight:600}
+.prog-info{text-align:right;font-size:11px;color:var(--muted);font-weight:600}
+.prog-wrap{background:var(--border);border-radius:99px;height:6px;width:100px;margin-top:4px}
+.prog-bar{background:linear-gradient(90deg,#E75480,#FF8FAB);border-radius:99px;height:6px;width:0%;transition:width .4s}
+.nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-btn{flex-shrink:0;padding:9px 12px;border:none;background:none;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:var(--muted);border-bottom:3px solid transparent;border-radius:8px 8px 0 0;transition:all .2s;white-space:nowrap}
+.nav-btn.active{color:var(--pink);border-bottom-color:var(--pink)}
+
+/* MAIN */
+main{max-width:700px;margin:0 auto;padding:16px 14px 90px}
+.page{display:none}.page.active{display:block}
+
+/* HERO CARD */
+.hero{background:linear-gradient(135deg,#E75480,#FF8FAB);border-radius:20px;padding:20px;color:#fff;margin-bottom:16px}
+.hero h2{font-family:'Nunito',sans-serif;font-size:18px;font-weight:800;margin-bottom:4px}
+.hero p{font-size:13px;opacity:.9;line-height:1.5}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px}
+.hstat{background:rgba(255,255,255,.2);border-radius:12px;padding:10px;text-align:center}
+.hstat-num{font-family:'Nunito',sans-serif;font-weight:800;font-size:18px}
+.hstat-lbl{font-size:10px;opacity:.85;margin-top:2px}
+
+/* SECTION TITLE */
+.sec-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+
+/* INFO CARD */
+.info-card{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:14px;margin-bottom:12px}
+.info-card h3{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;margin-bottom:8px}
+.info-card p{font-size:13px;line-height:1.7;color:var(--text)}
+.info-card ul{padding-left:18px;font-size:13px;line-height:2}
+
+/* MEAL CARD */
+.meal-section{margin-bottom:20px}
+.meal-hdr{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border:1.5px solid var(--border);border-radius:12px;margin-bottom:10px}
+.meal-em{font-size:20px}
+.meal-lbl{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px}
+.meal-time{margin-left:auto;font-size:11px;color:var(--muted);background:var(--bg);padding:3px 10px;border-radius:99px;border:1px solid var(--border)}
+.meal-card{background:#fff;border:1.5px solid var(--border);border-radius:16px;margin-bottom:10px;overflow:hidden}
+.meal-card-hdr{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;user-select:none;min-height:52px}
+.meal-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.meal-title{font-family:'Nunito',sans-serif;font-weight:700;font-size:14px;flex:1}
+.meal-cal{font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px;flex-shrink:0}
+.chev{width:18px;height:18px;color:var(--muted);transition:transform .25s;flex-shrink:0}
+.meal-card-hdr.open .chev{transform:rotate(180deg)}
+.meal-body{display:none;padding:0 14px 14px;border-top:1.5px solid var(--border)}
+.meal-body.show{display:block}
+.meal-detail{background:var(--bg);border-radius:10px;padding:12px;margin-top:10px;font-size:13px;line-height:1.8}
+.meal-detail strong{display:block;font-family:'Nunito',sans-serif;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.food-item{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px}
+.food-item:last-child{border-bottom:none}
+.food-em{font-size:16px;flex-shrink:0}
+.food-info{flex:1}
+.food-name{font-weight:600}
+.food-portion{font-size:11px;color:var(--muted)}
+.food-cal{font-size:11px;font-weight:700;color:var(--pink);flex-shrink:0}
+.chk-meal{width:30px;height:30px;border-radius:50%;border:2px solid var(--border);background:var(--bg);color:#ccc;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.chk-meal.done{background:#3DAA6E;border-color:#3DAA6E;color:#fff}
+
+/* EXERCISE CARD */
+.ex-card{background:#fff;border:1.5px solid var(--border);border-radius:16px;margin-bottom:10px;overflow:hidden}
+.ex-hdr{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;min-height:52px}
+.ex-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px;flex-shrink:0}
+.ex-body{display:none;padding:0 14px 14px;border-top:1.5px solid var(--border)}
+.ex-body.show{display:block}
+.ex-step{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;align-items:flex-start}
+.ex-step:last-child{border-bottom:none}
+.ex-num{width:22px;height:22px;border-radius:50%;background:var(--pink);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-family:'Nunito',sans-serif}
+.ex-dur{display:inline-block;background:#2D1A20;color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:99px;margin-bottom:4px;font-family:'Nunito',sans-serif}
+
+/* TIPS DIET */
+.tip-card{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
+.tip-em{font-size:24px;flex-shrink:0}
+.tip-content h4{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;margin-bottom:4px}
+.tip-content p{font-size:13px;line-height:1.6;color:var(--text)}
+
+/* DO DONT */
+.do-dont{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.do-box{background:#EDF8F2;border:1.5px solid #B8E6CC;border-radius:12px;padding:12px}
+.dont-box{background:#FEF0F0;border:1.5px solid #F5C6C6;border-radius:12px;padding:12px}
+.do-box strong{color:#3DAA6E;display:block;font-family:'Nunito',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.dont-box strong{color:#E74C3C;display:block;font-family:'Nunito',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.ddi{display:flex;gap:6px;padding:5px 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:12px;align-items:flex-start;line-height:1.5}
+.ddi:last-child{border-bottom:none}
+
+/* RIWAYAT */
+.rw-banner{background:linear-gradient(135deg,#E75480,#FF8FAB);border-radius:14px;padding:16px;color:#fff;margin-bottom:16px}
+.rw-banner h3{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;margin-bottom:4px}
+.rw-banner p{font-size:12px;opacity:.9}
+.streak-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px}
+.streak-card{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:12px;text-align:center}
+.streak-num{font-family:'Nunito',sans-serif;font-weight:800;font-size:22px;color:var(--pink);line-height:1}
+.streak-lbl{font-size:11px;color:var(--muted);font-weight:600;margin-top:4px}
+.rw-hdr2{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.rw-hdr2 h2{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800}
+.btn-clear{border:1.5px solid #F5C6C6;background:#FEF0F0;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;color:#E74C3C}
+.date-card{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px}
+.date-hdr{display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+.date-lbl{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px}
+.date-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.date-badge{background:linear-gradient(135deg,#E75480,#FF8FAB);color:#fff;font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;padding:3px 10px;border-radius:99px}
+.date-body{margin-top:12px;display:none}
+.rw-item{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px}
+.rw-item:last-child{border-bottom:none}
+.rw-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.empty-state{text-align:center;padding:40px 20px;color:var(--muted)}
+.empty-state .es-icon{font-size:40px;margin-bottom:12px}
+
+/* BERAT BADAN */
+.weight-form{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:16px;margin-bottom:16px}
+.weight-form h3{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;margin-bottom:12px}
+.w-input-row{display:flex;gap:8px;align-items:center}
+.w-input{flex:1;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:16px;font-family:'Nunito Sans',sans-serif;background:var(--bg);color:var(--text)}
+.w-input:focus{outline:none;border-color:var(--pink)}
+.btn-save-w{background:var(--pink);color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:700;font-size:13px}
+.weight-list{margin-top:12px}
+.weight-entry{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
+.weight-entry:last-child{border-bottom:none}
+.w-date{color:var(--muted);font-size:12px}
+.w-val{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;color:var(--pink)}
+.w-diff{font-size:11px;font-weight:700;padding:2px 6px;border-radius:99px}
+.w-down{background:#EDF8F2;color:#3DAA6E}
+.w-up{background:#FEF0F0;color:#E74C3C}
+.w-same{background:#F5F5F5;color:#888}
+.progress-target{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:16px;margin-bottom:16px}
+.progress-target h3{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;margin-bottom:12px}
+.target-bar-wrap{background:var(--border);border-radius:99px;height:12px;margin:8px 0}
+.target-bar{background:linear-gradient(90deg,#E75480,#3DAA6E);border-radius:99px;height:12px;transition:width .5s}
+.target-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-weight:600}
+
+/* STAT BAR */
+#statbar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid var(--border);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;z-index:100;box-shadow:0 -2px 12px rgba(0,0,0,.05)}
+.stat-item{text-align:center}
+.stat-num{font-family:'Nunito',sans-serif;font-weight:800;font-size:18px;line-height:1;color:var(--pink)}
+.stat-lbl{font-size:10px;color:var(--muted);font-weight:600}
+.btn-reset{border:1.5px solid var(--border);background:var(--bg);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;color:var(--muted)}
+
+.hidden{display:none!important}
+@media(max-width:500px){.do-dont{grid-template-columns:1fr}}
+@supports(padding:env(safe-area-inset-bottom)){
+  #statbar{padding-bottom:calc(10px + env(safe-area-inset-bottom))}
+  main{padding-bottom:calc(90px + env(safe-area-inset-bottom))}
+}
+</style>
+</head>
+<body>
+
+<div id="hdr">
+  <div class="hrow">
+    <div class="logo">
+      <div class="logo-ic">🌸</div>
+      <div class="logo-t">
+        <h1>Panduan Diet Sehat</h1>
+        <p>71kg menuju 60kg &middot; Turun 11 kg</p>
+      </div>
+    </div>
+    <div class="prog-info">
+      <div id="prog-txt">0 selesai hari ini</div>
+      <div class="prog-wrap"><div class="prog-bar" id="prog-bar"></div></div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="nav-btn active" data-page="pg-makan">🍽 Makan</button>
+    <button class="nav-btn" data-page="pg-gerak">🏃 Gerak</button>
+    <button class="nav-btn" data-page="pg-tips">💡 Tips</button>
+    <button class="nav-btn" data-page="pg-berat">⚖️ Berat</button>
+    <button class="nav-btn" data-page="pg-riwayat">📅 Riwayat</button>
+  </div>
+</div>
+
+<main>
+
+<!-- PAGE MAKAN -->
+<div id="pg-makan" class="page active">
+
+  <div class="hero">
+    <h2>Rencana Makan Harian</h2>
+    <p>Target kalori: <strong>1.400 kkal/hari</strong> &middot; Defisit &plusmn;500 kkal dari kebutuhan normal</p>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-num">71kg</div><div class="hstat-lbl">Berat Awal</div></div>
+      <div class="hstat"><div class="hstat-num">60kg</div><div class="hstat-lbl">Target</div></div>
+      <div class="hstat"><div class="hstat-num">3-4bln</div><div class="hstat-lbl">Estimasi</div></div>
+    </div>
+  </div>
+
+  <!-- SARAPAN -->
+  <div class="meal-section">
+    <div class="meal-hdr">
+      <span class="meal-em">🌅</span>
+      <span class="meal-lbl">Sarapan</span>
+      <span class="meal-time">06:30 - 07:30</span>
+    </div>
+
+    <div class="meal-card" data-meal="1">
+      <div class="meal-card-hdr">
+        <div class="meal-icon" style="background:#FFF0EB">🥚</div>
+        <div class="meal-title">Telur Rebus + Roti Gandum</div>
+        <span class="meal-cal" style="background:#FFF0EB;color:#E75480">~350 kkal</span>
+        <button class="chk-meal">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="meal-body">
+        <div class="food-item"><span class="food-em">🥚</span><div class="food-info"><div class="food-name">Telur rebus</div><div class="food-portion">2 butir</div></div><span class="food-cal">140 kkal</span></div>
+        <div class="food-item"><span class="food-em">🍞</span><div class="food-info"><div class="food-name">Roti gandum</div><div class="food-portion">2 lembar</div></div><span class="food-cal">140 kkal</span></div>
+        <div class="food-item"><span class="food-em">🍅</span><div class="food-info"><div class="food-name">Tomat + timun</div><div class="food-portion">1 buah sedang masing-masing</div></div><span class="food-cal">40 kkal</span></div>
+        <div class="food-item"><span class="food-em">☕</span><div class="food-info"><div class="food-name">Teh hijau tanpa gula</div><div class="food-portion">1 gelas</div></div><span class="food-cal">0 kkal</span></div>
+        <div class="meal-detail"><strong>Kenapa menu ini?</strong>Protein dari telur membuat kenyang lebih lama. Roti gandum serat tinggi menstabilkan gula darah. Cocok untuk ibu sibuk karena cepat disiapkan.</div>
+      </div>
+    </div>
+
+    <div class="meal-card" data-meal="2">
+      <div class="meal-card-hdr">
+        <div class="meal-icon" style="background:#EDF8F1">🥣</div>
+        <div class="meal-title">Oatmeal Buah + Susu Rendah Lemak</div>
+        <span class="meal-cal" style="background:#EDF8F1;color:#3DAA6E">~320 kkal</span>
+        <button class="chk-meal">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="meal-body">
+        <div class="food-item"><span class="food-em">🥣</span><div class="food-info"><div class="food-name">Oatmeal instan</div><div class="food-portion">40g (4 sdm)</div></div><span class="food-cal">150 kkal</span></div>
+        <div class="food-item"><span class="food-em">🥛</span><div class="food-info"><div class="food-name">Susu rendah lemak</div><div class="food-portion">200ml</div></div><span class="food-cal">80 kkal</span></div>
+        <div class="food-item"><span class="food-em">🍌</span><div class="food-info"><div class="food-name">Pisang / stroberi</div><div class="food-portion">1 buah kecil</div></div><span class="food-cal">60 kkal</span></div>
+        <div class="food-item"><span class="food-em">🫐</span><div class="food-info"><div class="food-name">Madu</div><div class="food-portion">1 sdt (opsional)</div></div><span class="food-cal">20 kkal</span></div>
+        <div class="meal-detail"><strong>Kenapa menu ini?</strong>Oatmeal adalah rajanya sarapan diet. Beta-glucan di dalamnya terbukti menekan nafsu makan hingga 4 jam. Bisa disiapkan 5 menit saja.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SNACK PAGI -->
+  <div class="meal-section">
+    <div class="meal-hdr">
+      <span class="meal-em">☀️</span>
+      <span class="meal-lbl">Snack Pagi</span>
+      <span class="meal-time">10:00</span>
+    </div>
+    <div class="meal-card" data-meal="3">
+      <div class="meal-card-hdr">
+        <div class="meal-icon" style="background:#FFF8EB">🍎</div>
+        <div class="meal-title">Buah + Kacang Almond</div>
+        <span class="meal-cal" style="background:#FFF8EB;color:#F5882A">~150 kkal</span>
+        <button class="chk-meal">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="meal-body">
+        <div class="food-item"><span class="food-em">🍎</span><div class="food-info"><div class="food-name">Apel / pir / jeruk</div><div class="food-portion">1 buah sedang</div></div><span class="food-cal">80 kkal</span></div>
+        <div class="food-item"><span class="food-em">🌰</span><div class="food-info"><div class="food-name">Kacang almond</div><div class="food-portion">10 butir</div></div><span class="food-cal">70 kkal</span></div>
+        <div class="meal-detail"><strong>Tips snack:</strong>Snack ini penting! Jangan skip karena akan membuat lapar berlebihan saat makan siang. Kacang almond mengandung lemak sehat yang menekan lapar.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAKAN SIANG -->
+  <div class="meal-section">
+    <div class="meal-hdr">
+      <span class="meal-em">🌤</span>
+      <span class="meal-lbl">Makan Siang</span>
+      <span class="meal-time">12:00 - 13:00</span>
+    </div>
+
+    <div class="meal-card" data-meal="4">
+      <div class="meal-card-hdr">
+        <div class="meal-icon" style="background:#EBF6FB">🍗</div>
+        <div class="meal-title">Nasi Merah + Ayam Panggang + Sayur</div>
+        <span class="meal-cal" style="background:#EBF6FB;color:#3498DB">~450 kkal</span>
+        <button class="chk-meal">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="meal-body">
+        <div class="food-item"><span class="food-em">🍚</span><div class="food-info"><div class="food-name">Nasi merah</div><div class="food-portion">3/4 centong (100g matang)</div></div><span class="food-cal">130 kkal</span></div>
+        <div class="food-item"><span class="food-em">🍗</span><div class="food-info"><div class="food-name">Dada ayam panggang/rebus</div><div class="food-portion">100g (tanpa kulit)</div></div><span class="food-cal">165 kkal</span></div>
+        <div class="food-item"><span class="food-em">🥦</span><div class="food-info"><div class="food-name">Brokoli/bayam/kangkung rebus</div><div class="food-portion">1 mangkok besar</div></div><span class="food-cal">50 kkal</span></div>
+        <div class="food-item"><span class="food-em">🍅</span><div class="food-info"><div class="food-name">Tomat + timun segar</div><div class="food-portion">sesuai selera</div></div><span class="food-cal">30 kkal</span></div>
+        <div class="food-item"><span class="food-em">💧</span><div class="food-info"><div class="food-name">Air putih</div><div class="food-portion">2 gelas</div></div><span class="food-cal">0 kkal</span></div>
+        <div class="meal-detail"><strong>Kiat piring sehat:</strong>Isi 1/2 piring sayur, 1/4 nasi merah, 1/4 protein. Makan sayur dahulu sebelum nasi untuk memperlambat penyerapan gula. Kunyah pelan minimal 20x per suapan.</div>
+      </div>
+    </div>
+
+    <div class="meal-card" data-meal="5">
+      <div class="meal-card-hdr">
+        <div class="meal-icon" style="background:#F7EDFB">🥗</div>
+        <div class="meal-title">Salad Ayam Tuna</div>
+        <span class="meal-cal" style="background:#F7EDFB;color:#9B59B6">~380 kkal</span>
+        <button class="chk-meal">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="meal-body">
+        <div class="food-item"><span class="food-em">🥬</span><div class="food-info"><div class="food-name">Selada / mixed green</div><div class="food-portion">3 genggam besar</div></div><span class="food-cal">20 kkal</span></div>
+        <div class="food-item"><span class="food-em">🐟</span><div class="food-info"><div class="food-name">Tuna kaleng (air, bukan minyak)</div><div class="food-portion">1 kaleng kecil 85g</div></div><span class="food-cal">100 kkal</span></div>
+        <div class="food-item"><span class="food-em">🥚</span><div class="food-info"><div class="food-name">Telur rebus</div><div class="food-portion">1 butir</div></div><span class="food-cal">70 kkal</span></div>
+        <div class="food-item"><span class="food-em">🍞</span><div class="food-info"><div class="food-name">Roti gandum</div><div class="food-portion">2 lembar</div></div><span class="food-cal">140 kkal</span></div>
+        <div class="food-item"><span class="food-em">🫒</span><div class="food-info"><div class="food-name">Lemon + olive oil dressing</div><div class="food-portion">1 sdt olive oil + perasan lemon</div></div><span class="food-cal">40 kkal</span></div>
+        <div class="meal-detail"><strong>Alternatif simpel:</strong>Bisa diganti nasi merah biasa jika tidak ada bahan salad. Yang penting tetap ada sayur, protein, dan karbohidrat kompleks.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SNACK SORE -->
+  <div class="meal-section">
+    <div class="meal-hdr">
+      <span class="meal-em">🌥</span>
+      <span class="meal-lbl">Snack Sore</span>
+      <span class="meal-time">15:00 - 16:00</span>
+    </div>
+    <div class="meal-card" data-meal="6">
+      <div class="meal-card-hdr">
+        <div class="meal-icon" style="background:#EDF8F1">🥛</div>
+        <div class="meal-title">Greek Yogurt / Yogurt Plain</div>
+        <span class="meal-cal" style="background:#EDF8F1;color:#3DAA6E">~120 kkal</span>
+        <button class="chk-meal">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="meal-body">
+        <div class="food-item"><span class="food-em">🥛</span><div class="food-info"><div class="food-name">Greek yogurt / yogurt plain</div><div class="food-portion">150g (tanpa gula tambahan)</div></div><span class="food-cal">100 kkal</span></div>
+        <div class="food-item"><span class="food-em">🫐</span><div class="food-info"><div class="food-name">Buah segar (stroberi/bluberi)</div><div class="food-portion">segenggam</div></div><span class="food-cal">30 kkal</span></div>
+        <div class="meal-detail"><strong>Kenapa yogurt?</strong>Probiotik membantu pencernaan dan metabolisme. Protein tinggi menekan lapar menuju makan malam. Pilih yang tanpa rasa (plain).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAKAN MALAM -->
+  <div class="meal-section">
+    <div class="meal-hdr">
+      <span class="meal-em">🌙</span>
+      <span class="meal-lbl">Makan Malam</span>
+      <span class="meal-time">18:00 - 19:00</span>
+    </div>
+
+    <div class="meal-card" data-meal="7">
+      <div class="meal-card-hdr">
+        <div class="meal-icon" style="background:#FFF0EB">🍲</div>
+        <div class="meal-title">Sup Sayur Protein (Tanpa Nasi)</div>
+        <span class="meal-cal" style="background:#FFF0EB;color:#E75480">~300 kkal</span>
+        <button class="chk-meal">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="meal-body">
+        <div class="food-item"><span class="food-em">🍗</span><div class="food-info"><div class="food-name">Dada ayam / ikan / tahu tempe</div><div class="food-portion">100g</div></div><span class="food-cal">150 kkal</span></div>
+        <div class="food-item"><span class="food-em">🥕</span><div class="food-info"><div class="food-name">Wortel, brokoli, jagung, buncis</div><div class="food-portion">bebas / banyak</div></div><span class="food-cal">80 kkal</span></div>
+        <div class="food-item"><span class="food-em">🧅</span><div class="food-info"><div class="food-name">Bawang putih, jahe, rempah</div><div class="food-portion">secukupnya</div></div><span class="food-cal">10 kkal</span></div>
+        <div class="food-item"><span class="food-em">💧</span><div class="food-info"><div class="food-name">Kaldu ayam / air + garam</div><div class="food-portion">500ml</div></div><span class="food-cal">20 kkal</span></div>
+        <div class="meal-detail"><strong>Aturan makan malam:</strong>Makan malam tanpa nasi atau maksimal 1/2 centong. Makan sebelum jam 19.00. Jika lapar setelahnya, minum air hangat atau teh herbal. Ini kunci utama penurunan berat badan.</div>
+      </div>
+    </div>
+
+    <div class="meal-card" data-meal="8">
+      <div class="meal-card-hdr">
+        <div class="meal-icon" style="background:#EBF6FB">🐟</div>
+        <div class="meal-title">Ikan Kukus + Tumis Sayur</div>
+        <span class="meal-cal" style="background:#EBF6FB;color:#3498DB">~280 kkal</span>
+        <button class="chk-meal">&#10003;</button>
+        <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="meal-body">
+        <div class="food-item"><span class="food-em">🐟</span><div class="food-info"><div class="food-name">Ikan kembung / nila / lele kukus</div><div class="food-portion">1 ekor sedang</div></div><span class="food-cal">150 kkal</span></div>
+        <div class="food-item"><span class="food-em">🥬</span><div class="food-info"><div class="food-name">Tumis kangkung / bayam</div><div class="food-portion">2 mangkok (sedikit minyak)</div></div><span class="food-cal">80 kkal</span></div>
+        <div class="food-item"><span class="food-em">🍚</span><div class="food-info"><div class="food-name">Nasi merah (opsional)</div><div class="food-portion">1/4 centong saja jika masih lapar</div></div><span class="food-cal">65 kkal</span></div>
+        <div class="meal-detail"><strong>Tips memasak:</strong>Kukus lebih baik dari goreng. Gunakan minyak zaitun / minyak kelapa 1 sdt saja untuk menumis. Tambahkan bawang putih dan cabai untuk rasa tanpa tambah kalori banyak.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AIR PUTIH -->
+  <div class="info-card" style="background:linear-gradient(135deg,#EBF6FB,#fff);border-color:#C2E4F5">
+    <h3>💧 Target Air Putih Harian</h3>
+    <p>Minum <strong>8-10 gelas (2 liter)</strong> per hari. Minum 1 gelas sebelum setiap makan untuk mengurangi porsi secara alami. Air putih cukup = metabolisme lebih cepat = lemak terbakar lebih efektif.</p>
+  </div>
+
+</div><!-- end pg-makan -->
+
+<!-- PAGE GERAK -->
+<div id="pg-gerak" class="page">
+
+  <div class="hero">
+    <h2>Olahraga 30 Menit/Hari</h2>
+    <p>Dirancang untuk ibu sibuk. Bisa dilakukan di rumah, tanpa alat khusus, sambil jaga anak.</p>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-num">30'</div><div class="hstat-lbl">Per Hari</div></div>
+      <div class="hstat"><div class="hstat-num">5x</div><div class="hstat-lbl">Per Minggu</div></div>
+      <div class="hstat"><div class="hstat-num">~250</div><div class="hstat-lbl">Kkal Bakar</div></div>
+    </div>
+  </div>
+
+  <div class="sec-title">📅 Jadwal Mingguan</div>
+
+  <div class="ex-card">
+    <div class="ex-hdr">
+      <div class="meal-icon" style="background:#FFF0EB;font-size:18px">💃</div>
+      <div style="flex:1"><div style="font-family:'Nunito',sans-serif;font-weight:700;font-size:14px">Senin & Rabu: Zumba / Dance</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Kardio ringan yang menyenangkan</div></div>
+      <span class="ex-badge" style="background:#FFF0EB;color:#E75480">250 kkal</span>
+      <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <div class="ex-body">
+      <div class="ex-step"><div class="ex-num">1</div><div><div class="ex-dur">5 menit</div>Pemanasan: jalan di tempat, ayun tangan, putar pinggang kanan kiri 20x</div></div>
+      <div class="ex-step"><div class="ex-num">2</div><div><div class="ex-dur">20 menit</div>Ikuti video Zumba di YouTube (cari "Zumba 20 menit pemula") atau joget bebas mengikuti lagu favorit. Gerakkan seluruh tubuh!</div></div>
+      <div class="ex-step"><div class="ex-num">3</div><div><div class="ex-dur">5 menit</div>Pendinginan: peregangan leher, bahu, pinggang, paha. Tarik napas dalam 5x</div></div>
+      <div class="meal-detail" style="margin-top:10px"><strong>Tips:</strong>Bisa dilakukan sambil anak tidur siang. Putar musik yang disukai untuk semangat. Tidak harus sempurna - yang penting bergerak!</div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-hdr">
+      <div class="meal-icon" style="background:#EDF8F1;font-size:18px">🧘</div>
+      <div style="flex:1"><div style="font-family:'Nunito',sans-serif;font-weight:700;font-size:14px">Selasa & Kamis: Yoga + Core</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Kencangkan perut dan pinggang</div></div>
+      <span class="ex-badge" style="background:#EDF8F1;color:#3DAA6E">200 kkal</span>
+      <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <div class="ex-body">
+      <div class="ex-step"><div class="ex-num">1</div><div><div class="ex-dur">5 menit</div>Pemanasan: cat-cow pose, child's pose, downward dog masing-masing 5x</div></div>
+      <div class="ex-step"><div class="ex-num">2</div><div><div class="ex-dur">10 menit</div><strong>Core workout:</strong> Plank 30 detik x3, Crunch 15x x3, Bicycle crunch 20x x3. Istirahat 30 detik antar set</div></div>
+      <div class="ex-step"><div class="ex-num">3</div><div><div class="ex-dur">10 menit</div>Yoga ringan: warrior pose, tree pose, bridge pose. Tahan 30 detik tiap gerakan</div></div>
+      <div class="ex-step"><div class="ex-num">4</div><div><div class="ex-dur">5 menit</div>Savasana: berbaring, relaksasi total, tarik napas dalam</div></div>
+      <div class="meal-detail" style="margin-top:10px"><strong>Manfaat:</strong>Yoga + core mengencangkan perut buncit pasca melahirkan. Memperbaiki postur dan mengurangi stres yang juga jadi penyebab susah kurus.</div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-hdr">
+      <div class="meal-icon" style="background:#FFF8EB;font-size:18px">🚶</div>
+      <div style="flex:1"><div style="font-family:'Nunito',sans-serif;font-weight:700;font-size:14px">Jumat: Jalan Kaki Cepat</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Bisa sambil bawa anak jalan-jalan</div></div>
+      <span class="ex-badge" style="background:#FFF8EB;color:#F5882A">180 kkal</span>
+      <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <div class="ex-body">
+      <div class="ex-step"><div class="ex-num">1</div><div><div class="ex-dur">5 menit</div>Jalan santai pemanasan sambil peregangan ringan</div></div>
+      <div class="ex-step"><div class="ex-num">2</div><div><div class="ex-dur">20 menit</div>Jalan cepat (bukan lari) - kecepatan sedang hingga sedikit ngos-ngosan. Target: 2-3 km. Bisa sambil dorong stroller anak!</div></div>
+      <div class="ex-step"><div class="ex-num">3</div><div><div class="ex-dur">5 menit</div>Jalan santai pendinginan + peregangan betis dan paha</div></div>
+      <div class="meal-detail" style="margin-top:10px"><strong>Tips tambahan:</strong>Parkir lebih jauh dari biasanya. Naik tangga bukan lift. Setiap langkah ekstra membantu! Target tambahan 7.000 langkah/hari.</div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-hdr">
+      <div class="meal-icon" style="background:#F7EDFB;font-size:18px">💪</div>
+      <div style="flex:1"><div style="font-family:'Nunito',sans-serif;font-weight:700;font-size:14px">Sabtu: Full Body di Rumah</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Tanpa alat, efektif membakar lemak</div></div>
+      <span class="ex-badge" style="background:#F7EDFB;color:#9B59B6">300 kkal</span>
+      <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <div class="ex-body">
+      <div class="ex-step"><div class="ex-num">1</div><div><div class="ex-dur">5 menit</div>Pemanasan jumping jack 30x, high knee 30x, arm circle</div></div>
+      <div class="ex-step"><div class="ex-num">2</div><div><div class="ex-dur">20 menit</div>Sirkuit 3 putaran: Squat 15x, Push-up (lutut) 10x, Lunges 10x/kaki, Glute bridge 15x, Mountain climber 20x. Istirahat 1 menit antar putaran</div></div>
+      <div class="ex-step"><div class="ex-num">3</div><div><div class="ex-dur">5 menit</div>Pendinginan dan peregangan menyeluruh</div></div>
+      <div class="meal-detail" style="margin-top:10px"><strong>Catatan:</strong>Push-up dengan lutut di lantai itu sah! Tidak perlu malu. Semua gerakan bisa dimodifikasi sesuai kemampuan. Yang penting konsisten.</div>
+    </div>
+  </div>
+
+  <div class="info-card" style="background:#EDF8F1;border-color:#B8E6CC">
+    <h3>😴 Minggu: Istirahat Aktif</h3>
+    <p>Jalan santai 15 menit, peregangan ringan, atau bermain aktif bersama anak. Tubuh butuh recovery untuk membakar lemak lebih optimal. Tidur 7-8 jam per malam juga sangat mempengaruhi penurunan berat badan!</p>
+  </div>
+
+</div><!-- end pg-gerak -->
+
+<!-- PAGE TIPS -->
+<div id="pg-tips" class="page">
+
+  <div class="sec-title">⭐ Kiat Utama Diet Berhasil</div>
+
+  <div class="tip-card"><span class="tip-em">🕗</span><div class="tip-content"><h4>Intermittent Fasting 16:8</h4><p>Makan hanya dalam jendela 8 jam (misal 07:00 - 19:00). Puasa 16 jam sisanya hanya air putih, teh, atau kopi tanpa gula. Terbukti efektif membakar lemak tanpa diet ketat.</p></div></div>
+  <div class="tip-card"><span class="tip-em">💧</span><div class="tip-content"><h4>Air Putih Sebelum Makan</h4><p>Minum 1-2 gelas air putih 30 menit sebelum makan. Penelitian membuktikan menurunkan asupan kalori rata-rata 13% per makan. Mudah tapi sangat efektif.</p></div></div>
+  <div class="tip-card"><span class="tip-em">🍽️</span><div class="tip-content"><h4>Pakai Piring Lebih Kecil</h4><p>Gunakan piring ukuran 20cm, bukan 25cm. Otak akan merasa kenyang dengan porsi yang sama karena piring terlihat penuh. Trik psikologi yang terbukti secara ilmiah.</p></div></div>
+  <div class="tip-card"><span class="tip-em">🐌</span><div class="tip-content"><h4>Makan Pelan, Kunyah 20x</h4><p>Rasa kenyang baru tersampaikan ke otak setelah 20 menit. Makan pelan memberi waktu sinyal kenyang bekerja sebelum Anda kekenyangan. Taruh sendok setelah setiap suapan.</p></div></div>
+  <div class="tip-card"><span class="tip-em">📱</span><div class="tip-content"><h4>Jauhkan HP Saat Makan</h4><p>Makan sambil main HP membuat makan 25% lebih banyak karena tidak fokus pada sinyal kenyang. Makan dengan sadar (mindful eating) adalah salah satu teknik diet paling efektif.</p></div></div>
+  <div class="tip-card"><span class="tip-em">😴</span><div class="tip-content"><h4>Tidur Cukup 7-8 Jam</h4><p>Kurang tidur meningkatkan hormon lapar (ghrelin) hingga 24% dan menurunkan hormon kenyang (leptin). Ibu yang kurang tidur hampir pasti sulit kurus meski diet ketat.</p></div></div>
+  <div class="tip-card"><span class="tip-em">📊</span><div class="tip-content"><h4>Timbang Seminggu Sekali</h4><p>Timbang berat badan setiap Senin pagi setelah bangun tidur dan buang air kecil. Jangan setiap hari karena berat normal naik turun 1-2kg akibat cairan. Catat di tab Berat Badan.</p></div></div>
+  <div class="tip-card"><span class="tip-em">🚫</span><div class="tip-content"><h4>Stop Minum Kalori</h4><p>Minuman manis (teh manis, jus kemasan, minuman berenergi, kopi susu) adalah sabotase terbesar diet. 1 gelas teh manis = 150 kkal = 15 menit jalan kaki. Ganti dengan air putih dan teh tanpa gula.</p></div></div>
+
+  <div class="sec-title">✅ Lakukan & Hindari</div>
+  <div class="do-dont">
+    <div class="do-box"><strong>Lakukan Ini</strong>
+      <div class="ddi"><span>✅</span><span>Sarapan dalam 1 jam setelah bangun</span></div>
+      <div class="ddi"><span>✅</span><span>Makan sayur setiap makan</span></div>
+      <div class="ddi"><span>✅</span><span>Protein di setiap makan (telur, ayam, ikan, tahu, tempe)</span></div>
+      <div class="ddi"><span>✅</span><span>Masak sendiri lebih sering</span></div>
+      <div class="ddi"><span>✅</span><span>Siapkan snack sehat sebelum lapar</span></div>
+      <div class="ddi"><span>✅</span><span>Istirahat cukup dan kelola stres</span></div>
+    </div>
+    <div class="dont-box"><strong>Hindari Ini</strong>
+      <div class="ddi"><span>❌</span><span>Minuman manis & soda</span></div>
+      <div class="ddi"><span>❌</span><span>Gorengan & makanan berminyak</span></div>
+      <div class="ddi"><span>❌</span><span>Nasi putih porsi besar malam hari</span></div>
+      <div class="ddi"><span>❌</span><span>Skip makan (malah bikin lapar brutal)</span></div>
+      <div class="ddi"><span>❌</span><span>Makan setelah jam 19.00</span></div>
+      <div class="ddi"><span>❌</span><span>Diet ketat terlalu cepat (yo-yo effect)</span></div>
+    </div>
+  </div>
+
+  <div class="sec-title">📅 Target Realistis</div>
+  <div class="info-card">
+    <h3>Penurunan 0,5 - 1 kg per Minggu</h3>
+    <p>Penurunan ideal adalah <strong>0,5-1 kg per minggu</strong>. Turun terlalu cepat (lebih dari 1 kg/minggu) justru berbahaya — tubuh akan membakar otot bukan lemak, dan berat akan naik kembali cepat (yo-yo). Dengan target 11 kg, estimasi <strong>3-4 bulan</strong> adalah target yang sehat dan bertahan lama.</p>
+    <br>
+    <p style="color:var(--pink);font-weight:700">Ingat: Ini bukan race. Ini perubahan gaya hidup permanen. 🌸</p>
+  </div>
+
+</div><!-- end pg-tips -->
+
+<!-- PAGE BERAT BADAN -->
+<div id="pg-berat" class="page">
+
+  <div class="hero">
+    <h2>Monitor Berat Badan</h2>
+    <p>Timbang setiap Senin pagi. Catat progres perjalanan menuju 60 kg.</p>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-num" id="w-current">71</div><div class="hstat-lbl">Berat Kini (kg)</div></div>
+      <div class="hstat"><div class="hstat-num">60</div><div class="hstat-lbl">Target (kg)</div></div>
+      <div class="hstat"><div class="hstat-num" id="w-sisa">11</div><div class="hstat-lbl">Sisa (kg)</div></div>
+    </div>
+  </div>
+
+  <div class="progress-target">
+    <h3>Progres Menuju Target</h3>
+    <div class="target-bar-wrap">
+      <div class="target-bar" id="target-bar" style="width:0%"></div>
+    </div>
+    <div class="target-labels">
+      <span>71 kg (mulai)</span>
+      <span id="target-pct">0%</span>
+      <span>60 kg (target)</span>
+    </div>
+  </div>
+
+  <div class="weight-form">
+    <h3>Catat Berat Badan Hari Ini</h3>
+    <div class="w-input-row">
+      <input type="number" class="w-input" id="w-input" placeholder="Contoh: 70.5" step="0.1" min="40" max="150">
+      <button class="btn-save-w" id="btn-save-weight">Simpan</button>
+    </div>
+  </div>
+
+  <div class="sec-title">📊 Riwayat Berat Badan</div>
+  <div id="weight-list"><div class="empty-state"><div class="es-icon">&#9878;</div><p>Belum ada data berat badan.<br>Mulai catat sekarang!</p></div></div>
+
+</div><!-- end pg-berat -->
+
+<!-- PAGE RIWAYAT -->
+<div id="pg-riwayat" class="page">
+  <div class="rw-banner">
+    <h3 id="rw-today-label">Hari ini</h3>
+    <p id="rw-today-sub">Memuat data...</p>
+  </div>
+  <div class="streak-row">
+    <div class="streak-card"><div class="streak-num" id="rw-hari">0</div><div class="streak-lbl">Hari Aktif</div></div>
+    <div class="streak-card"><div class="streak-num" id="rw-total">0</div><div class="streak-lbl">Total Menu</div></div>
+    <div class="streak-card"><div class="streak-num" id="rw-avg">0</div><div class="streak-lbl">Rata-rata/Hari</div></div>
+  </div>
+  <div class="rw-hdr2">
+    <h2>Riwayat Harian</h2>
+    <button class="btn-clear" id="btn-clear">Hapus Semua</button>
+  </div>
+  <div id="rw-list"></div>
+</div>
+
+</main>
+
+<!-- STAT BAR -->
+<div id="statbar">
+  <div class="stat-item"><div class="stat-num" id="stat-done">0</div><div class="stat-lbl">Selesai</div></div>
+  <div class="stat-item"><div class="stat-num">8</div><div class="stat-lbl">Total Menu</div></div>
+  <div class="stat-item"><div class="stat-num" id="stat-pct">0%</div><div class="stat-lbl">Progress</div></div>
+  <button class="btn-reset" id="btn-reset">Reset</button>
+</div>
+
+<script>
+(function(){
+  var TOTAL = 8;
+  var DAYS   = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+  var MONTHS = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+
+  var MENUS = [
+    {id:1, label:'Sarapan: Telur Rebus + Roti Gandum', cal:350},
+    {id:2, label:'Sarapan: Oatmeal Buah', cal:320},
+    {id:3, label:'Snack Pagi: Buah + Almond', cal:150},
+    {id:4, label:'Makan Siang: Nasi Merah + Ayam', cal:450},
+    {id:5, label:'Makan Siang: Salad Ayam Tuna', cal:380},
+    {id:6, label:'Snack Sore: Greek Yogurt', cal:120},
+    {id:7, label:'Makan Malam: Sup Sayur Protein', cal:300},
+    {id:8, label:'Makan Malam: Ikan Kukus + Sayur', cal:280}
+  ];
+
+  /* helpers */
+  function todayKey() {
+    var d = new Date();
+    var m = d.getMonth()+1; var dd = d.getDate();
+    return d.getFullYear()+'-'+(m<10?'0':'')+m+'-'+(dd<10?'0':'')+dd;
+  }
+  function fmtKey(key) {
+    var p=key.split('-');
+    var d=new Date(+p[0],+p[1]-1,+p[2]);
+    var tk=todayKey();
+    var base=DAYS[d.getDay()]+', '+d.getDate()+' '+MONTHS[d.getMonth()]+' '+p[0];
+    if(key===tk) return 'Hari Ini - '+base;
+    var yd=new Date(); yd.setDate(yd.getDate()-1);
+    var yk=yd.getFullYear()+'-'+(yd.getMonth()+1<10?'0':'')+(yd.getMonth()+1)+'-'+(yd.getDate()<10?'0':'')+yd.getDate();
+    if(key===yk) return 'Kemarin - '+base;
+    return base;
+  }
+  function lsGet(k) { try{return JSON.parse(localStorage.getItem(k)||'null');}catch(e){return null;} }
+  function lsSet(k,v) { try{localStorage.setItem(k,JSON.stringify(v));}catch(e){} }
+  function lsDel(k) { try{localStorage.removeItem(k);}catch(e){} }
+  function allMenuKeys() {
+    var out=[];
+    for(var i=0;i<localStorage.length;i++){
+      var k=localStorage.key(i);
+      if(k&&k.indexOf('diet_')=== 0) out.push(k);
+    }
+    out.sort(function(a,b){return a>b?-1:1;});
+    return out;
+  }
+
+  /* save/load today menu */
+  function saveTodayMenu() {
+    var ids=[];
+    var btns=document.querySelectorAll('.chk-meal');
+    for(var i=0;i<btns.length;i++){
+      if(btns[i].classList.contains('done')) ids.push(i+1);
+    }
+    var k='diet_'+todayKey();
+    if(ids.length>0) lsSet(k,ids); else lsDel(k);
+  }
+  var savedMenu = lsGet('diet_'+todayKey()) || [];
+  var mealBtns = document.querySelectorAll('.chk-meal');
+  for(var i=0;i<mealBtns.length;i++){
+    if(savedMenu.indexOf(i+1)!==-1) mealBtns[i].classList.add('done');
+  }
+
+  /* progress */
+  function updateProgress() {
+    var done=document.querySelectorAll('.chk-meal.done').length;
+    var pct=Math.round(done/TOTAL*100);
+    document.getElementById('stat-done').textContent=done;
+    document.getElementById('stat-pct').textContent=pct+'%';
+    document.getElementById('prog-bar').style.width=pct+'%';
+    document.getElementById('prog-txt').textContent=done+' menu selesai hari ini';
+  }
+  updateProgress();
+
+  /* nav */
+  var navBtns=document.querySelectorAll('.nav-btn');
+  for(var n=0;n<navBtns.length;n++){
+    (function(btn){
+      btn.addEventListener('click',function(){
+        for(var j=0;j<navBtns.length;j++) navBtns[j].classList.remove('active');
+        var pages=document.querySelectorAll('.page');
+        for(var j=0;j<pages.length;j++) pages[j].classList.remove('active');
+        btn.classList.add('active');
+        var pid=btn.getAttribute('data-page');
+        document.getElementById(pid).classList.add('active');
+        if(pid==='pg-riwayat') renderRiwayat();
+        if(pid==='pg-berat') renderWeightList();
+        window.scrollTo(0,0);
+      });
+    })(navBtns[n]);
+  }
+
+  /* meal card toggle */
+  var mhdrs=document.querySelectorAll('.meal-card-hdr');
+  for(var mh=0;mh<mhdrs.length;mh++){
+    (function(hdr){
+      hdr.addEventListener('click',function(e){
+        var t=e.target;
+        while(t&&t!==hdr){
+          if(t.classList&&t.classList.contains('chk-meal')) return;
+          t=t.parentNode;
+        }
+        var body=hdr.nextElementSibling;
+        var open=body.classList.contains('show');
+        body.classList[open?'remove':'add']('show');
+        hdr.classList[open?'remove':'add']('open');
+      });
+    })(mhdrs[mh]);
+  }
+
+  /* exercise card toggle */
+  var exhdrs=document.querySelectorAll('.ex-hdr');
+  for(var eh=0;eh<exhdrs.length;eh++){
+    (function(hdr){
+      hdr.addEventListener('click',function(){
+        var body=hdr.nextElementSibling;
+        var open=body.classList.contains('show');
+        body.classList[open?'remove':'add']('show');
+        hdr.classList[open?'remove':'add']('open');
+      });
+    })(exhdrs[eh]);
+  }
+
+  /* check meal buttons */
+  var chkBtns=document.querySelectorAll('.chk-meal');
+  for(var c=0;c<chkBtns.length;c++){
+    (function(btn){
+      btn.addEventListener('click',function(e){
+        e.stopPropagation();
+        btn.classList[btn.classList.contains('done')?'remove':'add']('done');
+        saveTodayMenu();
+        updateProgress();
+      });
+    })(chkBtns[c]);
+  }
+
+  /* reset */
+  document.getElementById('btn-reset').addEventListener('click',function(){
+    if(!confirm('Reset checklist hari ini?')) return;
+    var btns=document.querySelectorAll('.chk-meal');
+    for(var i=0;i<btns.length;i++) btns[i].classList.remove('done');
+    saveTodayMenu();
+    updateProgress();
+  });
+
+  /* weight tracking */
+  function renderWeightList() {
+    var entries = lsGet('weight_entries') || [];
+    var list = document.getElementById('weight-list');
+    if(entries.length===0){
+      list.innerHTML='<div class="empty-state"><div class="es-icon">&#9878;</div><p>Belum ada data berat badan.<br>Mulai catat sekarang!</p></div>';
+      updateWeightProgress(71);
+      return;
+    }
+    var latest = entries[entries.length-1].w;
+    updateWeightProgress(latest);
+    var html='';
+    for(var i=entries.length-1;i>=0;i--){
+      var e=entries[i];
+      var prev = i>0 ? entries[i-1].w : 71;
+      var diff = e.w - prev;
+      var diffHtml='';
+      if(diff<0) diffHtml='<span class="w-diff w-down">'+diff.toFixed(1)+'kg</span>';
+      else if(diff>0) diffHtml='<span class="w-diff w-up">+'+diff.toFixed(1)+'kg</span>';
+      else diffHtml='<span class="w-diff w-same">tetap</span>';
+      html+='<div class="weight-entry"><div><div style="font-weight:700">'+e.w+' kg</div><div class="w-date">'+e.date+'</div></div>'+diffHtml+'</div>';
+    }
+    list.innerHTML='<div class="info-card">'+html+'</div>';
+  }
+
+  function updateWeightProgress(current) {
+    var start=71, target=60;
+    var pct = Math.max(0, Math.min(100, Math.round((start-current)/(start-target)*100)));
+    var sisa = Math.max(0, (current-target)).toFixed(1);
+    document.getElementById('w-current').textContent = current;
+    document.getElementById('w-sisa').textContent = sisa;
+    document.getElementById('target-bar').style.width = pct+'%';
+    document.getElementById('target-pct').textContent = pct+'%';
+  }
+
+  document.getElementById('btn-save-weight').addEventListener('click',function(){
+    var val = parseFloat(document.getElementById('w-input').value);
+    if(isNaN(val)||val<30||val>200){ alert('Masukkan berat yang valid (contoh: 70.5)'); return; }
+    var entries = lsGet('weight_entries') || [];
+    var now = new Date();
+    var dateStr = DAYS[now.getDay()]+', '+now.getDate()+' '+MONTHS[now.getMonth()]+' '+now.getFullYear();
+    entries.push({w:val, date:dateStr, ts:Date.now()});
+    lsSet('weight_entries', entries);
+    document.getElementById('w-input').value='';
+    renderWeightList();
+  });
+
+  /* render riwayat */
+  function renderRiwayat() {
+    var keys=allMenuKeys();
+    var list=document.getElementById('rw-list');
+    var totalMenu=0;
+    for(var i=0;i<keys.length;i++) totalMenu+=(lsGet(keys[i])||[]).length;
+    document.getElementById('rw-hari').textContent=keys.length;
+    document.getElementById('rw-total').textContent=totalMenu;
+    document.getElementById('rw-avg').textContent=keys.length>0?Math.round(totalMenu/keys.length):0;
+
+    var todayIds=lsGet('diet_'+todayKey())||[];
+    var now=new Date();
+    document.getElementById('rw-today-label').textContent=DAYS[now.getDay()]+', '+now.getDate()+' '+MONTHS[now.getMonth()]+' '+now.getFullYear();
+    document.getElementById('rw-today-sub').textContent=todayIds.length>0
+      ? todayIds.length+' menu dijalankan hari ini'
+      : 'Belum ada menu yang dicatat hari ini';
+
+    if(keys.length===0){
+      list.innerHTML='<div class="empty-state"><div class="es-icon">&#128203;</div><p>Belum ada riwayat.<br>Centang menu di tab Makan<br>untuk mulai mencatat!</p></div>';
+      return;
+    }
+    list.innerHTML='';
+    for(var ki=0;ki<keys.length;ki++){
+      var ids=lsGet(keys[ki])||[];
+      if(ids.length===0) continue;
+      var dk=keys[ki].replace('diet_','');
+      var lbl=fmtKey(dk);
+      var bid='rb'+ki;
+      var card=document.createElement('div');
+      card.className='date-card';
+      var html='<div class="date-hdr" onclick="var b=document.getElementById(\''+bid+'\');b.style.display=b.style.display===\'block\'?\'none\':\'block\'">'
+        +'<div><div class="date-lbl">'+lbl+'</div><div class="date-sub">'+ids.length+' menu selesai</div></div>'
+        +'<span class="date-badge">'+ids.length+'/8</span></div>';
+      html+='<div id="'+bid+'" class="date-body" style="display:'+(ki===0?'block':'none')+'">';
+      for(var j=0;j<ids.length;j++){
+        var menu=null;
+        for(var mi=0;mi<MENUS.length;mi++){if(MENUS[mi].id===ids[j]){menu=MENUS[mi];break;}}
+        if(!menu) continue;
+        html+='<div class="rw-item"><div class="rw-dot" style="background:#E75480"></div><div style="flex:1">'+menu.label+'</div><div style="font-size:11px;font-weight:700;color:#E75480">'+menu.cal+' kkal</div></div>';
+      }
+      html+='</div>';
+      card.innerHTML=html;
+      list.appendChild(card);
+    }
+  }
+
+  document.getElementById('btn-clear').addEventListener('click',function(){
+    if(!confirm('Hapus semua riwayat diet?')) return;
+    var keys=allMenuKeys();
+    for(var i=0;i<keys.length;i++) lsDel(keys[i]);
+    renderRiwayat();
+  });
+
+  renderWeightList();
+})();
+</script>
+</body>
+</html>
